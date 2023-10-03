@@ -1,8 +1,12 @@
-type  CardProps = {
-  Cards: JSX.Element[];
+type  MainProps = {
+  Cards: JSX.Element[],
+  name :string,
+  date :string,
+  genre :string
 }
 
-function Main({Cards}: CardProps):JSX.Element{
+
+function Main(props: MainProps ):JSX.Element{
     return(
     <main>
         <section className="film-card">
@@ -40,10 +44,10 @@ function Main({Cards}: CardProps):JSX.Element{
           </div>
 
           <div className="film-card__desc">
-            <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="film-card__title">{Name}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">Drama</span>
-              <span className="film-card__year">2014</span>
+              <span className="film-card__genre">{Genre}</span>
+              <span className="film-card__year">{DateFilm}</span>
             </p>
 
             <div className="film-card__buttons">
@@ -104,7 +108,7 @@ function Main({Cards}: CardProps):JSX.Element{
         </ul>
 
         <div className="catalog__films-list">
-        {Cards}
+        {props.Cards}
         </div>
 
         <div className="catalog__more">

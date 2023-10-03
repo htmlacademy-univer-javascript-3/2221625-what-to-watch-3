@@ -1,6 +1,7 @@
 import Main from '../../pages/main/main';
 import Card from '../card/card';
 
+
 const imgComps= [
   {imgPath:"img/fantastic-beasts-the-crimes-of-grindelwald.jpg",imgName:"Fantastic Beasts: The Crimes of Grindelwald"},
   {imgPath:"img/bohemian-rhapsody.jpg",imgName:"Bohemian Rhapsody"},
@@ -28,10 +29,15 @@ const Cards :JSX.Element[] = imgComps.map((element) =>
 <Card imgPath={element.imgPath} imgName={element.imgName}/>
 );
 
-function App(): JSX.Element{
+type  MainFilmProps = {
+  name :string,
+  date :string,
+  genre :string
+}
+function App(props:MainFilmProps): JSX.Element{
    
     return(
-      < Main Cards={Cards}  />
+      < Main Cards={Cards} name={props.name} date={props.date} genre={props.genre}  />
     );
 }
 export default App
