@@ -1,7 +1,12 @@
 import Main from '../../pages/main/main';
-function App():JSX.Element{
+import Card from '../card/card';
+type ImgProps={
+    imgPath:string,
+    imgName:string
+  }
+function App({imgPath,imgName}: ImgProps): JSX.Element{
     return(
-     <Main/>
+     <Card imgPath={imgPath} imgName={imgName} />
     );
 }
 export default App

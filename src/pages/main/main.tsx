@@ -309,4 +309,4 @@ function Main():JSX.Element{
     )
 }
 
-export default Main()
+export default Main
