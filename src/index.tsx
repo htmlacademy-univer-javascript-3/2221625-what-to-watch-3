@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
 
-let name:string = "The Grand Budapest Hotel"
-let date:string = "2014"
-let genre:string = "Drama"
+const name = 'The Grand Budapest Hotel';
+const date = '2014';
+const genre = 'Drama';
 
 
 const root = ReactDOM.createRoot(
