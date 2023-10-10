@@ -1,4 +1,12 @@
-function AddReview():JSX.Element{
+import {useParams} from 'react-router-dom';
+interface ImgComp {
+  id: string;
+  imgPath: string;
+  imgName: string;
+}
+function AddReview({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
+  const params = useParams();
+  const imgComp = imgComps.find((imgComp) => imgComp.id === params.id);
   return(
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -41,7 +49,8 @@ function AddReview():JSX.Element{
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={imgComp?.imgPath} alt={imgComp?.imgName} width="218" height="327" />
+          {/*<img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />*/}
         </div>
       </div>
 

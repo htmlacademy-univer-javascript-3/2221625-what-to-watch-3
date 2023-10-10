@@ -1,12 +1,12 @@
 type MainProps = {
-  Cards: JSX.Element[];
-  name :string;
-  date :string;
-  genre :string;
+  Cards: ReactNode;
+  name: string;
+  date: string;
+  genre: string;
 }
 
 
-function Main(props: MainProps):JSX.Element{
+function Main(props: MainProps): JSX.Element{
   return(
     <main>
       <section className="film-card">
