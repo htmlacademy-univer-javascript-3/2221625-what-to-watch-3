@@ -6,7 +6,7 @@ interface ImgComp {
 }
 function AddReview({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
   const params = useParams();
-  const imgComp = imgComps.find((imgComp) => imgComp.id === params.id);
+  const currentImgComp = imgComps.find((imgComp) => imgComp.id === params.id);
   return(
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -49,7 +49,7 @@ function AddReview({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={imgComp?.imgPath} alt={imgComp?.imgName} width="218" height="327" />
+          <img src={currentImgComp?.imgPath} alt={currentImgComp?.imgName} width="218" height="327" />
           {/*<img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />*/}
         </div>
       </div>

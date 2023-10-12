@@ -6,10 +6,10 @@ interface ImgComp {
 }
 function Player({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
   const params = useParams();
-  const imgComp = imgComps.find((imgComp) => imgComp.id === params.id);
+  const currentImgComp = imgComps.find((imgComp) => imgComp.id === params.id);
   return(
     <div className="player">
-      <video src="#" className="player__video" poster={imgComp?.imgPath}></video>
+      <video src="#" className="player__video" poster={currentImgComp?.imgPath}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
