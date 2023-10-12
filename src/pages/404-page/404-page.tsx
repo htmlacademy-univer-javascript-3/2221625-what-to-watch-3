@@ -1,7 +1,7 @@
 function Page404():JSX.Element{
     return(
       <>
-        <p>404 Not Found</p>
+        <h1>404 Not Found</h1>
       </>
     );
   

@@ -11,6 +11,7 @@ import Player from '../../pages/player/player';
 //import SignInError from '../../pages/sign-in-error/sign-in-error';
 //import SignInMessage from '../../pages/sign-in-message/sign-in-message';
 import SignIn from '../../pages/sign-in/sign-in';
+import Page404 from '../../pages/404-page/404-page';
 import Card from '../card/card';
 import {
   BrowserRouter,
@@ -18,6 +19,11 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN'}
+import PrivateRoute from '../private-route/private-route';
 
 
 const imgComps = [
@@ -66,7 +72,7 @@ function App(props:MainFilmProps): JSX.Element{
     />
     <Route
         path='/mylist'
-        element={< MyList/>}
+        element={<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>< MyList/></PrivateRoute>}
     />
     <Route
         path='/films/:id'
@@ -79,6 +85,10 @@ function App(props:MainFilmProps): JSX.Element{
     <Route
         path='/player/:id'
         element={< Player imgComps={imgComps}/>}
+    />
+    <Route
+      path="*"
+      element={<Page404/>}
     />
 
     </Routes>
