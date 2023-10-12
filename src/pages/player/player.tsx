@@ -1,7 +1,15 @@
-function Player():JSX.Element{
+import {useParams} from 'react-router-dom';
+interface ImgComp {
+  id: string;
+  imgPath: string;
+  imgName: string;
+}
+function Player({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
+  const params = useParams();
+  const currentImgComp = imgComps.find((imgComp) => imgComp.id === params.id);
   return(
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src="#" className="player__video" poster={currentImgComp?.imgPath}></video>
 
       <button type="button" className="player__exit">Exit</button>
 
