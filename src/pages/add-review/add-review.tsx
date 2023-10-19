@@ -1,4 +1,5 @@
 import {useParams} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {useState, ChangeEvent} from 'react';
 type FilmComp = {
   name: string;
@@ -27,11 +28,11 @@ function AddReview({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
 
         <header className="page-header">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link to="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <nav className="breadcrumbs">
