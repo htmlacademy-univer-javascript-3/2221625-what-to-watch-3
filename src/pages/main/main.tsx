@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 type MainProps = {
   Cards: ReactNode;
   name: string;
@@ -10,6 +11,10 @@ type MainProps = {
 
 
 function Main(props: MainProps): JSX.Element{
+  const navigate = useNavigate();
+  function playerClick() {
+    navigate(`/player/0`);
+  }
   return(
     <main>
       <section className="film-card">
@@ -54,7 +59,7 @@ function Main(props: MainProps): JSX.Element{
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={playerClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

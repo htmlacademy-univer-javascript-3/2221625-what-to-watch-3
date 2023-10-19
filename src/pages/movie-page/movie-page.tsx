@@ -1,5 +1,6 @@
 import {useParams} from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 type FilmComp = {
   name: string;
   date: string;
@@ -14,6 +15,11 @@ type FilmComp = {
 function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const params = useParams();
   const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
+  const navigate = useNavigate();
+  function playerClick() {
+    navigate(`/player/${currentFilmComp?.id}`);
+  }
+ 
   return(
     <>
       <section className="film-card film-card--full">
@@ -54,7 +60,7 @@ function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={playerClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

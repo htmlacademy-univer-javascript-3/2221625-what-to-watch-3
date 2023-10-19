@@ -15,7 +15,7 @@ function Player({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
   return(
     <div className="player">
-      <video src="#" className={currentFilmComp?.video} poster={currentFilmComp?.playerPoster}></video>
+      <video src={currentFilmComp?.video} className="player__video" poster={currentFilmComp?.playerPoster}></video>
 
 
       <button type="button" className="player__exit">Exit</button>
