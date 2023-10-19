@@ -13,7 +13,7 @@ type MainProps = {
 function Main(props: MainProps): JSX.Element{
   const navigate = useNavigate();
   function playerClick() {
-    navigate(`/player/0`);
+    navigate('/player/0');
   }
   return(
     <main>

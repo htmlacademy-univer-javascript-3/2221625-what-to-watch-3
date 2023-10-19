@@ -17,9 +17,9 @@ function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
   const navigate = useNavigate();
   function playerClick() {
-    navigate(`/player/${currentFilmComp?.id}`);
+    navigate(`/player/${currentFilmComp?.id ?? ''}`);
   }
- 
+
   return(
     <>
       <section className="film-card film-card--full">
