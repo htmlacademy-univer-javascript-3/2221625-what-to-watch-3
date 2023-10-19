@@ -1,12 +1,22 @@
 import {useParams} from 'react-router-dom';
-interface ImgComp {
-  id: string;
-  imgPath: string;
-  imgName: string;
+import { Link } from 'react-router-dom';
+import {useState, ChangeEvent} from 'react';
+type FilmComp = {
+  name: string;
+  date: string;
+  genre: string;
+  id:string;
+  cardImgPath:string;
+  posterImgPath:string;
+  bgImgPath:string;
+  video:string;
+  playerPoster:string;
 }
-function AddReview({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
+function AddReview({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const params = useParams();
-  const currentImgComp = imgComps.find((imgComp) => imgComp.id === params.id);
+  const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
+  const [reviewText, setReviewText] = useState('Review text');
+
   return(
     <section className="film-card film-card--full">
       <div className="film-card__header">
@@ -18,11 +28,11 @@ function AddReview({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
 
         <header className="page-header">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link to="/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <nav className="breadcrumbs">
@@ -49,8 +59,8 @@ function AddReview({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={currentImgComp?.imgPath} alt={currentImgComp?.imgName} width="218" height="327" />
-          {/*<img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />*/}
+          <img src={currentFilmComp?.bgImgPath} alt={`${currentFilmComp?.name ? `${currentFilmComp.name} poster` : 'None'}`} width="218" height="327" />
+
         </div>
       </div>
 
@@ -91,7 +101,16 @@ function AddReview({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
           </div>
 
           <div className="add-review__text">
-            <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea
+              className="add-review__textarea"
+              name="review-text"
+              id="review-text"
+              value={reviewText}
+              onChange={({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+                setReviewText(target.value);
+              }}
+            >
+            </textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
             </div>

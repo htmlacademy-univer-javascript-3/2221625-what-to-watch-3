@@ -1,29 +1,42 @@
 import {useParams} from 'react-router-dom';
-interface ImgComp {
-  id: string;
-  imgPath: string;
-  imgName: string;
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+type FilmComp = {
+  name: string;
+  date: string;
+  genre: string;
+  id:string;
+  cardImgPath:string;
+  posterImgPath:string;
+  bgImgPath:string;
+  video:string;
+  playerPoster:string;
 }
-function MoviePage({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
+function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const params = useParams();
-  const currentImgComp = imgComps.find((imgComp) => imgComp.id === params.id);
+  const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
+  const navigate = useNavigate();
+  function playerClick() {
+    navigate(`/player/${currentFilmComp?.id ?? ''}`);
+  }
+
   return(
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={currentFilmComp?.bgImgPath} alt={currentFilmComp?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
             <div className="logo">
-              <a href="main.html" className="logo__link">
+              <Link to="/" className="logo__link">
                 <span className="logo__letter logo__letter--1">W</span>
                 <span className="logo__letter logo__letter--2">T</span>
                 <span className="logo__letter logo__letter--3">W</span>
-              </a>
+              </Link>
             </div>
 
             <ul className="user-block">
@@ -40,14 +53,14 @@ function MoviePage({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{currentFilmComp?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{currentFilmComp?.genre}</span>
+                <span className="film-card__year">{currentFilmComp?.date}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={playerClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -60,7 +73,7 @@ function MoviePage({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link to={currentFilmComp?.id ? `/films/${currentFilmComp.id}/addreview` : '/'} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
@@ -69,8 +82,8 @@ function MoviePage({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={currentImgComp?.imgPath} alt={currentImgComp?.imgName} width="218" height="327" />
-              {/*<img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" /> */}
+              <img src={currentFilmComp?.posterImgPath} alt={`${currentFilmComp?.name ? `${currentFilmComp.name} poster` : 'None'}`} width="218" height="327" />
+
             </div>
 
             <div className="film-card__desc">

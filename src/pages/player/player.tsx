@@ -1,15 +1,22 @@
 import {useParams} from 'react-router-dom';
-interface ImgComp {
-  id: string;
-  imgPath: string;
-  imgName: string;
+type FilmComp = {
+  name: string;
+  date: string;
+  genre: string;
+  id:string;
+  cardImgPath:string;
+  posterImgPath:string;
+  bgImgPath:string;
+  video:string;
+  playerPoster:string;
 }
-function Player({ imgComps }: { imgComps: Array<ImgComp> }):JSX.Element{
+function Player({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const params = useParams();
-  const currentImgComp = imgComps.find((imgComp) => imgComp.id === params.id);
+  const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
   return(
     <div className="player">
-      <video src="#" className="player__video" poster={currentImgComp?.imgPath}></video>
+      <video src={currentFilmComp?.video} className="player__video" poster={currentFilmComp?.playerPoster}></video>
+
 
       <button type="button" className="player__exit">Exit</button>
 
