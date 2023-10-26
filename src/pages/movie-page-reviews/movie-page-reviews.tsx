@@ -1,4 +1,4 @@
-function MoviePageRreviews():JSX.Element{
+function MoviePageReviews():JSX.Element{
   return(
     <>
       <section className="film-card film-card--full">
@@ -226,4 +226,4 @@ function MoviePageRreviews():JSX.Element{
     </>
   );
 }
-export default MoviePageRreviews;
+export default MoviePageReviews;
