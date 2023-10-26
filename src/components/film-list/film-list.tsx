@@ -17,7 +17,7 @@ type FilmComp = {
 }
 function FilmList({ filmComps, genre }: { filmComps: Array<FilmComp>; genre: string | undefined}):JSX.Element{
   return(
-    <div>
+    <>
       {genre !== undefined ? (
         filmComps
           .filter((element) => element.genre === genre)
@@ -39,7 +39,7 @@ function FilmList({ filmComps, genre }: { filmComps: Array<FilmComp>; genre: str
 
         })
       )}
-    </div>
+    </>
   );
 }
 export default FilmList;
