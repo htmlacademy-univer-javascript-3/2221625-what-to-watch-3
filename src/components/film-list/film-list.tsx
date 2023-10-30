@@ -15,31 +15,42 @@ type FilmComp = {
   director:string;
   starring:string;
 }
-function FilmList({ filmComps, genre }: { filmComps: Array<FilmComp>, genre: string | undefined}):JSX.Element{
-  return(
-    <>
-      {genre !== undefined ? (
-      filmComps
-        .filter((element) => element.genre === genre)
-        .slice(0, 4)
-        .map((element) => (
-          <Card
-            key={`Film ${element.id}`}
-            id={element.id}
-            imgPath={element.cardImgPath}
-            imgName={element.name}
-            videoPath={element.videoPath}
-          />
-        ))
+function FilmList({ filmComps, genre }: { filmComps: Array<FilmComp>; genre: string | undefined}): JSX.Element {
+  return (
+    genre !== undefined ? (
+      <>
+        {filmComps
+          .filter((element) => element.genre === genre)
+          .slice(0, 4)
+          .map((element) => (
+            <Card
+              key={`Film ${element.id}`}
+              id={element.id}
+              imgPath={element.cardImgPath}
+              imgName={element.name}
+              videoPath={element.videoPath}
+            />
+          ))}
+      </>
     ) : (
-        filmComps.map((element) => {
+      <>
+        {filmComps.map((element) => {
           if (element.id !== '0') {
-            return <Card key={`Film ${element.id}`} id={element.id} imgPath={element.cardImgPath} imgName={element.name} videoPath={element.videoPath} />;
+            return (
+              <Card
+                key={`Film ${element.id}`}
+                id={element.id}
+                imgPath={element.cardImgPath}
+                imgName={element.name}
+                videoPath={element.videoPath}
+              />
+            );
           }
-          
-        })
-      )}
-    </>
+          return null;
+        })}
+      </>
+    )
+
   );
 }
 export default FilmList;
