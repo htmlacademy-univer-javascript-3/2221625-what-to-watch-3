@@ -15,7 +15,7 @@ type FilmComp = {
   director:string;
   starring:string;
 }
-function FilmList({ filmComps, genre }: { filmComps: Array<FilmComp>; genre: string | undefined}): JSX.Element {
+function FilmList({ filmComps, genre }: { filmComps: FilmComp[]; genre: string | undefined}): JSX.Element {
   return (
     genre !== undefined ? (
       <>

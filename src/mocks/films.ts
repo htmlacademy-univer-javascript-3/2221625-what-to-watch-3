@@ -1,4 +1,4 @@
-export const imgComps = [
+export const filmComps = [
   {
     id: '0',
     name:'The Grand Budapest Hotel',
@@ -13,26 +13,158 @@ export const imgComps = [
     score:'8,9',
     ratingCount:'240 ratings',
     director:'Wes Anderson',
-    starring:'Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other'
+    starring:'Bill Murray, Edward Norton, Jude Law, Willem Dafoe, Saoirse Ronan, Tony Revoloru, Tilda Swinton, Tom Wilkinson, Owen Wilkinson, Adrien Brody, Ralph Fiennes, Jeff Goldblum',
+    runtime:"1h 39m",
   },
-  {id: '1',name:'Fantastic Beasts: The Crimes of Grindelwald',date:'#',genre:'#',cardImgPath:'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'img/rickrol.mp4',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '2',name:'Bohemian Rhapsody',date:'#',genre:'#',cardImgPath:'img/bohemian-rhapsody.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '3',name:'Macbeth',date:'#',genre:'#',cardImgPath:'img/macbeth.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '4',name:'Aviator',date:'#',genre:'#',cardImgPath:'img/aviator.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '5',name:'We need to talk about Kevin',date:'#',genre:'#',cardImgPath:'img/we-need-to-talk-about-kevin.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '6',name:'What We Do in the Shadows',date:'#',genre:'#',cardImgPath:'img/what-we-do-in-the-shadows.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '7',name:'Revenant',date:'#',genre:'#',cardImgPath:'img/revenant.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '8',name:'Johnny English',date:'#',genre:'#',cardImgPath:'img/johnny-english.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '9',name:'Shutter Island',date:'#',genre:'#',cardImgPath:'img/shutter-island.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '10',name:'Pulp Fiction',date:'#',genre:'#',cardImgPath:'img/pulp-fiction.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '11',name:'No Country for Old Men',date:'#',genre:'#',cardImgPath:'img/no-country-for-old-men.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '12',name:'Snatch',date:'#',genre:'#',cardImgPath:'img/snatch.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '13',name:'Moonrise Kingdom',date:'#',genre:'#',cardImgPath:'img/moonrise-kingdom.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '14',name:'Seven Years in Tibet',date:'#',genre:'#',cardImgPath:'img/seven-years-in-tibet.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '15',name:'Midnight Special',date:'#',genre:'#.',cardImgPath:'img/midnight-special.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '16',name:'War of the Worlds',date:'#',genre:'#.',cardImgPath:'img/war-of-the-worlds.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '17',name:'Dardjeeling Limited',date:'#',genre:'#.',cardImgPath:'img/dardjeeling-limited.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '18',name:'Orlando',date:'#',genre:'#.',cardImgPath:'img/orlando.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '19',name:'Mindhunter',date:'#',genre:'#.',cardImgPath:'img/mindhunter.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
-  {id: '20',name:'Midnight Special',date:'#',genre:'#.',cardImgPath:'img/midnight-special.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#'},
+  {id: '1',name:'Fantastic Beasts: The Crimes of Grindelwald',date:'#',genre:'#',cardImgPath:'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'img/rickrol.mp4',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '2',name:'Bohemian Rhapsody',date:'#',genre:'#',cardImgPath:'img/bohemian-rhapsody.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '3',name:'Macbeth',date:'#',genre:'#',cardImgPath:'img/macbeth.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '4',name:'Aviator',date:'#',genre:'#',cardImgPath:'img/aviator.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '5',name:'We need to talk about Kevin',date:'#',genre:'#',cardImgPath:'img/we-need-to-talk-about-kevin.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '6',name:'What We Do in the Shadows',date:'#',genre:'#',cardImgPath:'img/what-we-do-in-the-shadows.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '7',name:'Revenant',date:'#',genre:'#',cardImgPath:'img/revenant.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '8',name:'Johnny English',date:'#',genre:'#',cardImgPath:'img/johnny-english.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '9',name:'Shutter Island',date:'#',genre:'#',cardImgPath:'img/shutter-island.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '10',name:'Pulp Fiction',date:'#',genre:'#',cardImgPath:'img/pulp-fiction.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '11',name:'No Country for Old Men',date:'#',genre:'#',cardImgPath:'img/no-country-for-old-men.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '12',name:'Snatch',date:'#',genre:'#',cardImgPath:'img/snatch.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '13',name:'Moonrise Kingdom',date:'#',genre:'#',cardImgPath:'img/moonrise-kingdom.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '14',name:'Seven Years in Tibet',date:'#',genre:'#',cardImgPath:'img/seven-years-in-tibet.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '15',name:'Midnight Special',date:'#',genre:'#.',cardImgPath:'img/midnight-special.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '16',name:'War of the Worlds',date:'#',genre:'#.',cardImgPath:'img/war-of-the-worlds.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '17',name:'Dardjeeling Limited',date:'#',genre:'#.',cardImgPath:'img/dardjeeling-limited.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '18',name:'Orlando',date:'#',genre:'#.',cardImgPath:'img/orlando.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '19',name:'Mindhunter',date:'#',genre:'#.',cardImgPath:'img/mindhunter.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
+  {id: '20',name:'Midnight Special',date:'#',genre:'#.',cardImgPath:'img/midnight-special.jpg',posterImgPath:'#',bgImgPath:'#',videoPath:'#',playerPoster:'#',description:'#',score:'#',ratingCount:'#',director:'#',starring:'#',runtime:'#'},
 ];
+export const filmReviews = [  {
+    id: '0',
+    reviews:[
+      {
+        text: "Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director’s funniest and most exquisitely designed films in years.",
+        author: "Kate Muir",
+        date: "December 24, 2016",
+        rating: "8,9"
+      },
+      {
+        text: "Anderson’s films are too precious for some, but for those of us willing to lose ourselves in them, they’re a delight. \"The Grand Budapest Hotel\" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.",
+        author: "Bill Goodykoontz",
+        date: "November 18, 2015",
+        rating: "8,0"
+      },
+      {
+        text: "I didn’t find it amusing, and while I can appreciate the creativity, it’s an hour and 40 minutes I wish I could take back.",
+        author: "Amanda Greever",
+        date: "November 18, 2015",
+        rating: "8,0"
+      },
+      {
+        text: "The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.",
+        author: "Matthew Lickona",
+        date: "December 20, 2016",
+        rating: "7,2"
+      },
+      {
+        text: "It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.",
+        author: "Paula Fleri-Soler",
+        date: "December 20, 2016",
+        rating: "7,6"
+      },
+      {
+        text: "It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.",
+        author: "Paula Fleri-Soler",
+        date: "December 20, 2016",
+        rating: "7,0"
+      }
+    ]
+    
+  },
+  {
+    id: '1',
+    reviews:[]
+  },
+  {
+    id: '2',
+    reviews:[]
+  },
+  {
+    id: '3',
+    reviews:[]
+  },
+  {
+    id: '4',
+    reviews:[]
+  },
+  {
+    id: '5',
+    reviews:[]
+  },
+  {
+    id: '6',
+    reviews:[]
+  },
+  {
+    id: '7',
+    reviews:[]
+  },
+  {
+    id: '8',
+    reviews:[]
+  },
+
+  {
+    id: '9',
+    reviews:[]
+  },
+  {
+    id: '10',
+    reviews:[]
+  },
+  {
+    id: '11',
+    reviews:[]
+  },
+  {
+    id: '12',
+    reviews:[]
+  },
+  {
+    id: '13',
+    reviews:[]
+  },
+  {
+    id: '1',
+    reviews:[]
+  },
+  {
+    id: '14',
+    reviews:[]
+  },
+  {
+    id: '15',
+    reviews:[]
+  },
+  {
+    id: '16',
+    reviews:[]
+  },
+  {
+    id: '17',
+    reviews:[]
+  },
+  {
+    id: '18',
+    reviews:[]
+  },
+  {
+    id: '19',
+    reviews:[]
+  },
+  {
+    id: '20',
+    reviews:[]
+  },
+
+
+
+]

@@ -18,10 +18,24 @@ type FilmComp = {
   ratingCount:string;
   director:string;
   starring:string;
+  runtime:string;
 }
-function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
+type Review ={
+
+  text: string;
+  author:string;
+  date: string
+  rating: string
+
+}
+type FilmReviews={
+  id: string;
+  reviews: Review[];
+}
+function MoviePage({ filmComps, filmReviews}: { filmComps: FilmComp[]; filmReviews: FilmReviews[]} ):JSX.Element{
   const params = useParams();
   const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
+  const currentReviews = filmReviews.find((filmReviews) => filmReviews.id === params.id);
 
   const navigate = useNavigate();
   function playerClick() {
@@ -87,7 +101,7 @@ function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
           </div>
         </div>
 
-        <Tabs currentFilmComp={currentFilmComp}></Tabs>
+        <Tabs currentFilmComp={currentFilmComp} currentReviews={currentReviews}></Tabs>
       </section>
 
       <div className="page-content">

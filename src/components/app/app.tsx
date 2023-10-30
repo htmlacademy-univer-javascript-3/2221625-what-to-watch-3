@@ -18,6 +18,19 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'}
 import PrivateRoute from '../private-route/private-route';
 
+type Review ={
+
+  text: string;
+  author:string;
+  date: string
+  rating: string
+
+}
+type FilmReviews={
+  id: string;
+  reviews: Review[];
+}
+
 type MainFilmProps = {
   films: {
       name: string;
@@ -34,7 +47,9 @@ type MainFilmProps = {
       ratingCount:string;
       director:string;
       starring:string;
+      runtime:string;
   }[];
+  reviews: FilmReviews[];
 }
 
 function App(props:MainFilmProps): JSX.Element{
@@ -56,7 +71,7 @@ function App(props:MainFilmProps): JSX.Element{
         />
         <Route
           path='/films/:id'
-          element={< MoviePage filmComps={props.films}/>}
+          element={< MoviePage filmComps={props.films} filmReviews={props.reviews}/>}
         />
 
         <Route
