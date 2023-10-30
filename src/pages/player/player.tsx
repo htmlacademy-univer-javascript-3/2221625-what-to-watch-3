@@ -7,15 +7,20 @@ type FilmComp = {
   cardImgPath:string;
   posterImgPath:string;
   bgImgPath:string;
-  video:string;
+  videoPath:string;
   playerPoster:string;
+  description:string;
+  score:string;
+  ratingCount:string;
+  director:string;
+  starring:string;
 }
 function Player({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const params = useParams();
   const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
   return(
     <div className="player">
-      <video src={currentFilmComp?.video} className="player__video" poster={currentFilmComp?.playerPoster}></video>
+      <video src={currentFilmComp?.videoPath} className="player__video" poster={currentFilmComp?.playerPoster}></video>
 
 
       <button type="button" className="player__exit">Exit</button>

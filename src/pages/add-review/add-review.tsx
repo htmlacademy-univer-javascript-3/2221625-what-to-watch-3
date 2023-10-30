@@ -9,8 +9,13 @@ type FilmComp = {
   cardImgPath:string;
   posterImgPath:string;
   bgImgPath:string;
-  video:string;
+  videoPath:string;
   playerPoster:string;
+  description:string;
+  score:string;
+  ratingCount:string;
+  director:string;
+  starring:string;
 }
 function AddReview({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
   const params = useParams();

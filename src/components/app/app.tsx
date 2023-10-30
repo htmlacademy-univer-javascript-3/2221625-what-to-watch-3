@@ -18,18 +18,22 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'}
 import PrivateRoute from '../private-route/private-route';
 
-
 type MainFilmProps = {
   films: {
-    name: string;
-    date: string;
-    genre: string;
-    id:string;
-    cardImgPath:string;
-    posterImgPath:string;
-    bgImgPath:string;
-    video:string;
-    playerPoster:string;
+      name: string;
+      date: string;
+      genre: string;
+      id:string;
+      cardImgPath:string;
+      posterImgPath:string;
+      bgImgPath:string;
+      videoPath:string;
+      playerPoster:string;
+      description:string;
+      score:string;
+      ratingCount:string;
+      director:string;
+      starring:string;
   }[];
 }
 
@@ -40,7 +44,7 @@ function App(props:MainFilmProps): JSX.Element{
       <Routes>
         <Route
           path='/'
-          element={< Main Cards={<FilmList filmComps={props.films}></FilmList>} name={props.films[0].name} date={props.films[0].date} genre={props.films[0].genre} bgImgPath={props.films[0].bgImgPath} posterImgPath={props.films[0].posterImgPath}/>}
+          element={< Main Cards={<FilmList filmComps={props.films} genre={undefined} ></FilmList>} name={props.films[0].name} date={props.films[0].date} genre={props.films[0].genre} bgImgPath={props.films[0].bgImgPath} posterImgPath={props.films[0].posterImgPath}/>}
         />
         <Route
           path='/login'
@@ -54,6 +58,7 @@ function App(props:MainFilmProps): JSX.Element{
           path='/films/:id'
           element={< MoviePage filmComps={props.films}/>}
         />
+
         <Route
           path='/films/:id/addreview'
           element={< AddReview filmComps={props.films}/>}
