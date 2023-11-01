@@ -1,17 +1,45 @@
-import { ReactNode } from 'react';
+
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-type MainProps = {
-  Cards: ReactNode;
+import { useDispatch } from 'react-redux';
+import { setGenre } from '../../store/action';
+import ListGenres from '../../components/list-genres/list-genres';
+
+type FilmComp = {
   name: string;
   date: string;
   genre: string;
-  bgImgPath: string;
+  id:string;
+  cardImgPath:string;
   posterImgPath:string;
+  bgImgPath:string;
+  videoPath:string;
+  playerPoster:string;
+  description:string;
+  score:string;
+  ratingCount:string;
+  director:string;
+  starring:string;
+  runtime:string;
+}
+
+type MainProps = {
+  filmComps: FilmComp[];
+  name: string | undefined;
+  date: string | undefined;
+  genre: string | undefined;
+  bgImgPath: string | undefined;
+  posterImgPath:string | undefined;
 }
 
 
 function Main(props: MainProps): JSX.Element{
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setGenre('All genres'));
+  }, [dispatch]);
+
   function playerClick() {
     navigate('/player/0');
   }
@@ -48,7 +76,7 @@ function Main(props: MainProps): JSX.Element{
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={props.posterImgPath} alt={`${props.name}poster`} width="218" height="327" />
+              <img src={props.posterImgPath ?? ''} alt={`${props.name ?? ''} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
@@ -79,50 +107,7 @@ function Main(props: MainProps): JSX.Element{
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
-
-          <div className="catalog__films-list">
-            {props.Cards}
-          </div>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
-        </section>
+        <ListGenres filmComps={props.filmComps} />
 
         <footer className="page-footer">
           <div className="logo">

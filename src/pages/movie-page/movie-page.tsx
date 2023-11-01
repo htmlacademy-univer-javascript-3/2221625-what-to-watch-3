@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
+import { useDispatch } from 'react-redux';
+import { setGenre } from '../../store/action';
+import { useEffect } from 'react';
+
 type FilmComp = {
   name: string;
   date: string;
@@ -18,10 +22,29 @@ type FilmComp = {
   ratingCount:string;
   director:string;
   starring:string;
+  runtime:string;
 }
-function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
+type Review ={
+
+  text: string;
+  author:string;
+  date: string;
+  rating: string;
+
+}
+type FilmReviews={
+  id: string;
+  reviews: Review[];
+}
+function MoviePage({ filmComps, filmReviewsList }: { filmComps: FilmComp[]; filmReviewsList : FilmReviews[]}):JSX.Element{
   const params = useParams();
   const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
+  const currentReviews = filmReviewsList.find((filmReviews) => filmReviews.id === params.id);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setGenre(currentFilmComp?.genre || 'All genres'));
+  }, [currentFilmComp?.genre, dispatch]);
+
 
   const navigate = useNavigate();
   function playerClick() {
@@ -87,7 +110,7 @@ function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
           </div>
         </div>
 
-        <Tabs currentFilmComp={currentFilmComp}></Tabs>
+        <Tabs currentFilmComp={currentFilmComp} currentReviews={currentReviews}></Tabs>
       </section>
 
       <div className="page-content">
@@ -95,7 +118,7 @@ function MoviePage({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {<FilmList filmComps={filmComps} genre={currentFilmComp?.genre} ></FilmList>}
+            {<FilmList filmComps={filmComps.slice(0, 4)} ></FilmList>}
           </div>
         </section>
 
