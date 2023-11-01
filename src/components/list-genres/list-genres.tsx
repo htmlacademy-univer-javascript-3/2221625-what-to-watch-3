@@ -93,7 +93,7 @@ function ListGenres(props: ListGenresProps) {
       </ul>
 
       <div className="catalog__films-list">
-        { <FilmList filmComps={props.filmComps.filter((element) => element.id !== '0')} ></FilmList>}
+        { <FilmList filmComps={props.filmComps} ></FilmList>}
       </div>
 
       <div className="catalog__more">

@@ -67,7 +67,7 @@ function App(props:MainFilmProps): JSX.Element{
       <Routes>
         <Route
           path='/'
-          element={< Main filmComps={filmComps.filter((element) => element.id !== '0')} name={mainFilm?.name} date={mainFilm?.date} genre={mainFilm?.genre} bgImgPath={mainFilm?.bgImgPath} posterImgPath={mainFilm?.posterImgPath}/>}
+          element={< Main filmComps={filmComps} name={mainFilm?.name} date={mainFilm?.date} genre={mainFilm?.genre} bgImgPath={mainFilm?.bgImgPath} posterImgPath={mainFilm?.posterImgPath}/>}
         />
         <Route
           path='/login'
