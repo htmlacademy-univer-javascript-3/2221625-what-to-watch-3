@@ -28,7 +28,6 @@ function FilmList({ filmComps }: { filmComps: FilmComp[]}): JSX.Element {
         />
       ))}
     </>
-
+  );
 }
 export default FilmList;
-
