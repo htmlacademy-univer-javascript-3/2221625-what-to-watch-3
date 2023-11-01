@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
+import { useDispatch } from 'react-redux';
+import { setGenre } from '../../store/action';
+import { useEffect } from 'react';
+
 type FilmComp = {
   name: string;
   date: string;
@@ -24,18 +28,23 @@ type Review ={
 
   text: string;
   author:string;
-  date: string
-  rating: string
+  date: string;
+  rating: string;
 
 }
 type FilmReviews={
   id: string;
   reviews: Review[];
 }
-function MoviePage({ filmComps, filmReviews}: { filmComps: FilmComp[]; filmReviews: FilmReviews[]} ):JSX.Element{
+function MoviePage({ filmComps, filmReviewsList }: { filmComps: FilmComp[]; filmReviewsList : FilmReviews[]}):JSX.Element{
   const params = useParams();
   const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
-  const currentReviews = filmReviews.find((filmReviews) => filmReviews.id === params.id);
+  const currentReviews = filmReviewsList.find((filmReviews) => filmReviews.id === params.id);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setGenre(currentFilmComp?.genre || 'All genres'));
+  }, [currentFilmComp?.genre, dispatch]);
+
 
   const navigate = useNavigate();
   function playerClick() {
@@ -109,7 +118,7 @@ function MoviePage({ filmComps, filmReviews}: { filmComps: FilmComp[]; filmRevie
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {<FilmList filmComps={filmComps} genre={currentFilmComp?.genre} ></FilmList>}
+            {<FilmList filmComps={filmComps.slice(0, 4)} ></FilmList>}
           </div>
         </section>
 

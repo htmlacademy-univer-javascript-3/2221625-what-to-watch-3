@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import VideoPlayer from '../videoPlayer/videoPlayer';
+
 type ImgProps={
   id:string;
   imgPath:string;
@@ -13,8 +14,11 @@ function Card({id,imgPath,imgName,videoPath}: ImgProps): JSX.Element{
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [displayedPath, setDisplayedPath] = useState(imgPath);
+
+
   function handleClick() {
     navigate(`/films/${id}`);
+
   }
 
   useEffect(() => {

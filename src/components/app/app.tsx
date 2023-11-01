@@ -5,13 +5,14 @@ import MyList from '../../pages/my-list/my-list';
 import Player from '../../pages/player/player';
 import SignIn from '../../pages/sign-in/sign-in';
 import Page404 from '../../pages/404-page/404-page';
-import FilmList from '../film-list/film-list';
+import { useSelector } from 'react-redux';
 
 import {
   BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -19,47 +20,54 @@ export enum AuthorizationStatus {
 import PrivateRoute from '../private-route/private-route';
 
 type Review ={
-
   text: string;
   author:string;
-  date: string
-  rating: string
-
+  date: string;
+  rating: string;
 }
 type FilmReviews={
   id: string;
   reviews: Review[];
 }
 
+type FilmComp = {
+  id:string;
+  name: string;
+  date: string;
+  genre: string;
+  cardImgPath:string;
+  posterImgPath:string;
+  bgImgPath:string;
+  videoPath:string;
+  playerPoster:string;
+  description:string;
+  score:string;
+  ratingCount:string;
+  director:string;
+  starring:string;
+  runtime:string;
+}
+type AppState = {
+  genre: string | undefined;
+  filmComps: FilmComp[];
+  mainFilm:FilmComp | undefined;
+  more :number;
+}
+
 type MainFilmProps = {
-  films: {
-      name: string;
-      date: string;
-      genre: string;
-      id:string;
-      cardImgPath:string;
-      posterImgPath:string;
-      bgImgPath:string;
-      videoPath:string;
-      playerPoster:string;
-      description:string;
-      score:string;
-      ratingCount:string;
-      director:string;
-      starring:string;
-      runtime:string;
-  }[];
   reviews: FilmReviews[];
 }
 
 function App(props:MainFilmProps): JSX.Element{
-
+  const appState = useSelector((state:AppState) => state);
+  const filmComps = appState.filmComps;
+  const mainFilm = appState.mainFilm;
   return(
     <BrowserRouter>
       <Routes>
         <Route
           path='/'
-          element={< Main Cards={<FilmList filmComps={props.films} genre={undefined} ></FilmList>} name={props.films[0].name} date={props.films[0].date} genre={props.films[0].genre} bgImgPath={props.films[0].bgImgPath} posterImgPath={props.films[0].posterImgPath}/>}
+          element={< Main filmComps={filmComps.filter((element) => element.id !== '0')} name={mainFilm?.name} date={mainFilm?.date} genre={mainFilm?.genre} bgImgPath={mainFilm?.bgImgPath} posterImgPath={mainFilm?.posterImgPath}/>}
         />
         <Route
           path='/login'
@@ -71,16 +79,16 @@ function App(props:MainFilmProps): JSX.Element{
         />
         <Route
           path='/films/:id'
-          element={< MoviePage filmComps={props.films} filmReviews={props.reviews}/>}
+          element={< MoviePage filmComps={filmComps} filmReviewsList={props.reviews}/>}
         />
 
         <Route
           path='/films/:id/addreview'
-          element={< AddReview filmComps={props.films}/>}
+          element={< AddReview filmComps={filmComps}/>}
         />
         <Route
           path='/player/:id'
-          element={< Player filmComps={props.films}/>}
+          element={< Player filmComps={filmComps}/>}
         />
         <Route
           path="*"

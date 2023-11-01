@@ -4,6 +4,7 @@ import OverviewTab from './overview-tab/overview-tab';
 import DetailTab from './details-tab/details-tab';
 import ReviewsTab from './reviews-tab/reviews-tab';
 
+
 type FilmComp = {
     name: string;
     date: string;
@@ -39,7 +40,7 @@ type TabsProps = {
 
 function Tabs({currentFilmComp,currentReviews} : TabsProps) {
   const [activeTab, setActiveTab] = useState('overview');
-  
+
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
@@ -71,7 +72,7 @@ function Tabs({currentFilmComp,currentReviews} : TabsProps) {
           )}
 
           {activeTab === 'details' && (
-            <DetailTab director={currentFilmComp?.director}  starring={currentFilmComp?.starring} runtime={currentFilmComp?.runtime} genre={currentFilmComp?.genre} date={currentFilmComp?.date}/>
+            <DetailTab director={currentFilmComp?.director} starring={currentFilmComp?.starring} runtime={currentFilmComp?.runtime} genre={currentFilmComp?.genre} date={currentFilmComp?.date}/>
           )}
 
           {activeTab === 'reviews' && (

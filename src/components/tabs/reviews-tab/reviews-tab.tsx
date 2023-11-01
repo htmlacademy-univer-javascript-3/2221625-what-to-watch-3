@@ -6,21 +6,22 @@ type ReviewsProps={
     rating:string;
   }
 function ReviewsTab({reviews}: { reviews: ReviewsProps[] }): JSX.Element{
-    return(
+  return(
     <div className="film-card__reviews film-card__row">
-        <div className="film-card__reviews-col">
-            {reviews.map((review) => (
-            <Review
+      <div className="film-card__reviews-col">
+        {reviews.map((review) => (
+          <Review
+            key={`review_${review.author}_${review.date}`}
             text={review.text}
             author={review.author}
             date={review.date}
             rating={review.rating}
-            />
-            ))}
+          />
+        ))}
 
-        </div>
+      </div>
     </div>
 
-  )
+  );
 }
 export default ReviewsTab;
