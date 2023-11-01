@@ -47,10 +47,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setGenre, (state, action) => {
       const { payload } = action;
       state.genre = payload;
-      
+
       state.more = 8 > filterFilmComps(payload, filmComps).length ? -1 : 8;
-      state.filmComps =state.more>0 ? filterFilmComps(payload, filmComps).slice(0,state.more) : filterFilmComps(payload, filmComps);
-      console.log(state.filmComps)
+      state.filmComps = state.more > 0 ? filterFilmComps(payload, filmComps).slice(0,state.more) : filterFilmComps(payload, filmComps);
 
     })
     .addCase(setMore, (state, action) => {
@@ -58,7 +57,7 @@ const reducer = createReducer(initialState, (builder) => {
 
       state.more = state.more + payload - 1 > filterFilmComps(state.genre, filmComps).length ? -1 : state.more + payload;
 
-      state.filmComps = payload>0 ? filterFilmComps(state.genre, filmComps).slice(0,state.more) : filterFilmComps(state.genre, filmComps);
+      state.filmComps = payload > 0 ? filterFilmComps(state.genre, filmComps).slice(0,state.more) : filterFilmComps(state.genre, filmComps);
     });
 });
 
