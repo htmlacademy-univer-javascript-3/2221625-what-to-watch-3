@@ -1,6 +1,6 @@
 # Личный проект «Что посмотреть»
 
-* Студент: [Константин Реент](https://up.htmlacademy.ru/univer-js3/3/user/2221625). aaaaaaaaaaaaaaaaaaaaa
+* Студент: [Константин Реент](https://up.htmlacademy.ru/univer-js3/3/user/2221625).
 * Наставник: `Владимир Ульянов`.
 
 ---
