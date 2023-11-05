@@ -4,8 +4,10 @@ import App from './components/app/app';
 import { filmReviews} from './mocks/films';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
+import { fetchFilms, fetchPromoFilm } from './store/api-actions';
 
-
+store.dispatch(fetchFilms())
+store.dispatch(fetchPromoFilm())
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

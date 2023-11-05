@@ -5,36 +5,16 @@ import { useDispatch } from 'react-redux';
 import { setGenre, setMore } from '../../store/action';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-type FilmComp = {
-    name: string;
-    date: string;
-    genre: string;
-    id:string;
-    cardImgPath:string;
-    posterImgPath:string;
-    bgImgPath:string;
-    videoPath:string;
-    playerPoster:string;
-    description:string;
-    score:string;
-    ratingCount:string;
-    director:string;
-    starring:string;
-    runtime:string;
-  }
+import {FilmCard} from '../../types/film'
+import {State} from '../../types/state'
 type ListGenresProps = {
-  filmComps: FilmComp[];
+  filmComps: FilmCard[];
 }
-type ListState = {
-  genre: string | undefined;
-  filmComps: FilmComp[];
-  mainFilm:FilmComp | undefined;
-  more :number;
-}
+
 function ListGenres(props: ListGenresProps) {
   const [activeTab, setActiveTab] = useState('All genres');
 
-  const listState = useSelector((state:ListState) => state);
+  const listState = useSelector((state: State) => state);
   const more = listState.more;
 
   const dispatch = useDispatch();
@@ -93,7 +73,7 @@ function ListGenres(props: ListGenresProps) {
       </ul>
 
       <div className="catalog__films-list">
-        { <FilmList filmComps={props.filmComps} ></FilmList>}
+        { <FilmList {...props.filmComps} ></FilmList>}
       </div>
 
       <div className="catalog__more">

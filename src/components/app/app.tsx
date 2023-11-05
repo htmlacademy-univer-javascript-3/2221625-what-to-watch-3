@@ -1,11 +1,13 @@
 import Main from '../../pages/main/main';
-import AddReview from '../../pages/add-review/add-review';
-import MoviePage from '../../pages/movie-page/movie-page';
+
 import MyList from '../../pages/my-list/my-list';
-import Player from '../../pages/player/player';
+import {useAppSelector} from '../../hooks';
 import SignIn from '../../pages/sign-in/sign-in';
 import Page404 from '../../pages/404-page/404-page';
 import { useSelector } from 'react-redux';
+import {State} from '../../types/state'
+
+
 
 import {
   BrowserRouter,
@@ -30,44 +32,41 @@ type FilmReviews={
   reviews: Review[];
 }
 
-type FilmComp = {
-  id:string;
-  name: string;
-  date: string;
-  genre: string;
-  cardImgPath:string;
-  posterImgPath:string;
-  bgImgPath:string;
-  videoPath:string;
-  playerPoster:string;
-  description:string;
-  score:string;
-  ratingCount:string;
-  director:string;
-  starring:string;
-  runtime:string;
-}
-type AppState = {
-  genre: string | undefined;
-  filmComps: FilmComp[];
-  mainFilm:FilmComp | undefined;
-  more :number;
-}
 
 type MainFilmProps = {
   reviews: FilmReviews[];
 }
 
 function App(props:MainFilmProps): JSX.Element{
-  const appState = useSelector((state:AppState) => state);
-  const filmComps = appState.filmComps;
-  const mainFilm = appState.mainFilm;
+  const appState = useSelector((state:State) => state);
+  
+  const filmComps = appState.filtredFilmComps;
+  const promoFilm = appState.promoFilm;
+  
+
+  /*
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isQuestionsDataLoading = useAppSelector(getQuestionsDataLoadingStatus);
+  const hasError = useAppSelector(getErrorStatus);
+  if (!isAuthChecked || isQuestionsDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
+  
+  if (hasError) {
+    return (
+      <ErrorScreen />);
+  }
+  */
+
   return(
     <BrowserRouter>
       <Routes>
         <Route
           path='/'
-          element={< Main filmComps={filmComps} name={mainFilm?.name} date={mainFilm?.date} genre={mainFilm?.genre} bgImgPath={mainFilm?.bgImgPath} posterImgPath={mainFilm?.posterImgPath}/>}
+          element={< Main filmComps={filmComps} promoFilm={promoFilm} />}
         />
         <Route
           path='/login'
@@ -77,19 +76,21 @@ function App(props:MainFilmProps): JSX.Element{
           path='/mylist'
           element={<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>< MyList/></PrivateRoute>}
         />
+        {/*
         <Route
           path='/films/:id'
-          element={< MoviePage filmComps={filmComps} filmReviewsList={props.reviews}/>}
+          element={< MoviePage />}
         />
 
         <Route
           path='/films/:id/addreview'
-          element={< AddReview filmComps={filmComps}/>}
+          element={< AddReview />}
         />
         <Route
           path='/player/:id'
-          element={< Player filmComps={filmComps}/>}
+          element={< Player />}
         />
+  */}
         <Route
           path="*"
           element={<Page404/>}

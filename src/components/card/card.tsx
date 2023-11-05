@@ -2,48 +2,43 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import VideoPlayer from '../videoPlayer/videoPlayer';
+import {FilmCard} from '../../types/film'
 
-type ImgProps={
-  id:string;
-  imgPath:string;
-  imgName:string;
-  videoPath:string;
-}
 
-function Card({id,imgPath,imgName,videoPath}: ImgProps): JSX.Element{
+
+function Card(cardProps: FilmCard): JSX.Element{
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
-  const [displayedPath, setDisplayedPath] = useState(imgPath);
-
+  const [displayedPath, setDisplayedPath] = useState(cardProps.previewImage);
 
   function handleClick() {
-    navigate(`/films/${id}`);
-
+    navigate(`/films/${cardProps.id}`);
+    
   }
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isHovered) {
       timer = setTimeout(() => {
-        setDisplayedPath(videoPath);
+        setDisplayedPath(cardProps.previewVideoLink);
       }, 1000);
     } else {
-      setDisplayedPath(imgPath);
+      setDisplayedPath(cardProps.previewImage);
     }
     return () => clearTimeout(timer);
-  }, [isHovered, imgPath, videoPath]);
+  }, [isHovered, cardProps.previewImage, cardProps.previewVideoLink]);
 
   return(
     <article className="small-film-card catalog__films-card" onClick={handleClick} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="small-film-card__image">
-        {displayedPath === videoPath ? (
-          <VideoPlayer videoId={id} videoPath={displayedPath} mute/>
+        {displayedPath === cardProps.previewVideoLink ? (
+          <VideoPlayer videoId={cardProps.id} videoPath={displayedPath} mute/>
         ) : (
-          <img src={displayedPath} alt={imgName} width="280" height="175" id={id} />
+          <img src={displayedPath} alt={cardProps.name} width="280" height="175" id={cardProps.id} />
         )}
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>{imgName}</Link>
+        <Link className="small-film-card__link" to={`/films/${cardProps.id}`}>{cardProps.name}</Link>
       </h3>
     </article>);
 }
