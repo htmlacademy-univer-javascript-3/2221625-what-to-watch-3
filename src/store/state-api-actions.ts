@@ -1,6 +1,6 @@
 import {store} from './index'
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setError, requireAuthorization, redirectToRoute} from './action';
+import { requireAuthorization, redirectToRoute} from './action';
 import { AxiosInstance } from 'axios';
 import { saveToken, dropToken } from '../services/token';
 import {State, AppDispatch} from '../types/state'
@@ -8,17 +8,7 @@ import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const'
 import {UserData} from '../types/user-data'
 import {AuthData} from '../types/auth-data'
 
-export const clearErrorAction = createAsyncThunk (
-    'game/clearError',
-    ()=>{
-        setTimeout(
 
-            ()=>store.dispatch(setError(null)),
-            TIMEOUT_SHOW_ERROR,
-        );
-    },
-    
-);
 
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
@@ -48,7 +38,6 @@ createAsyncThunk<void, AuthData,
     async ({login: email, password},{dispatch,extra:api}) => {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email,    password});
     saveToken(token);
-
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute('/'));
 },

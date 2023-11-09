@@ -17,4 +17,3 @@ export const loadCurrentFilmRecomends = createAction<FilmCard[]>('data/loadCurre
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization')
 export const redirectToRoute = createAction<string>('site/redirectToRoute')
-export const setError = createAction<string | null>('site/setError')

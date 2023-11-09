@@ -34,14 +34,9 @@ function MoviePage():JSX.Element{
   const currentFilmComp = appState.currentFilm;
   const currentReviews = appState.currentFilmReviews;
   const currentRecomends = appState.currentFilmRecomends;
-  const currentError = appState.error;
 
   
-  if (currentError!==null)
-  { return(
-      <p>404</p>
-    )
-  }
+
 
 
 

@@ -1,6 +1,6 @@
 import { createReducer} from '@reduxjs/toolkit';
 import {loadCurrentFilmRecomends, loadCurrentFilmReviews, setGenre} from './action';
-import {setMore, setError, setID,requireAuthorization, setFilmsLoadingStatus} from './action';
+import {setMore,  setID,requireAuthorization, setFilmsLoadingStatus} from './action';
 import { loadFilms,loadPromoFilm,loadCurrentFilm } from './action';
 import {FilmCard, PromoFilm, FilmComp} from '../types/film'
 
@@ -19,7 +19,6 @@ const initialState:State = {
   currentFilmRecomends: [],
   more: 8,
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
 };
 
 function filterFilmComps(genre: string, films: FilmCard[]): FilmCard[] {
@@ -74,10 +73,6 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       const { payload } = action;
       state.authorizationStatus=payload
-    })
-    .addCase(setError, (state, action) => {
-      const { payload } = action;
-      state.error=payload
     })
 });
 

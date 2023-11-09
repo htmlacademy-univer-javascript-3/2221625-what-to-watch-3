@@ -13,7 +13,6 @@ export type State = {
     currentFilmRecomends:FilmCard[];
     more :number;
     authorizationStatus: AuthorizationStatus,
-    error :string | null;
   }
 
 export type AppDispatch = typeof store.dispatch;
