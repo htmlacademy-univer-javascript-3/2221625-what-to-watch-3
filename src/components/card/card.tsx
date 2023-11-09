@@ -6,7 +6,7 @@ import {FilmCard} from '../../types/film'
 
 
 
-function Card(cardProps: FilmCard): JSX.Element{
+function Card({cardProps}: {cardProps:FilmCard}): JSX.Element{
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [displayedPath, setDisplayedPath] = useState(cardProps.previewImage);

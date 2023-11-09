@@ -1,16 +1,20 @@
 import Main from '../../pages/main/main';
-
+import AddReview from '../../pages/add-review/add-review';
+import MoviePage from '../../pages/movie-page/movie-page';
+import Player from '../../pages/player/player';
 import MyList from '../../pages/my-list/my-list';
+import HistoryRouter from '../history-route';
+import browserHistory from '../../browser-history';
 import {useAppSelector} from '../../hooks';
 import SignIn from '../../pages/sign-in/sign-in';
 import Page404 from '../../pages/404-page/404-page';
 import { useSelector } from 'react-redux';
 import {State} from '../../types/state'
+import LoadingPage from '../../pages/LoadingPage/LoadingPage';
 
 
-
+ 
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
@@ -42,27 +46,15 @@ function App(props:MainFilmProps): JSX.Element{
   
   const filmComps = appState.filtredFilmComps;
   const promoFilm = appState.promoFilm;
-  
+  const isFilmCompsLoaded=useAppSelector((state)=>state.isFilmCompsLoaded);
+  const authorizationStatus=useAppSelector((state)=>state.authorizationStatus);
 
-  /*
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
-  const isQuestionsDataLoading = useAppSelector(getQuestionsDataLoadingStatus);
-  const hasError = useAppSelector(getErrorStatus);
-  if (!isAuthChecked || isQuestionsDataLoading) {
-    return (
-      <LoadingScreen />
-    );
-  }
-  
-  if (hasError) {
-    return (
-      <ErrorScreen />);
-  }
-  */
+ if (isFilmCompsLoaded || authorizationStatus=== AuthorizationStatus.Unknown)
+  return(<LoadingPage/>)
+
 
   return(
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path='/'
@@ -74,14 +66,14 @@ function App(props:MainFilmProps): JSX.Element{
         />
         <Route
           path='/mylist'
-          element={<PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>< MyList/></PrivateRoute>}
+          element={<PrivateRoute authorizationStatus={authorizationStatus}>< MyList/></PrivateRoute>}
         />
-        {/*
+       
         <Route
           path='/films/:id'
           element={< MoviePage />}
         />
-
+        {/*
         <Route
           path='/films/:id/addreview'
           element={< AddReview />}
@@ -90,14 +82,15 @@ function App(props:MainFilmProps): JSX.Element{
           path='/player/:id'
           element={< Player />}
         />
-  */}
+ 
         <Route
           path="*"
           element={<Page404/>}
         />
+        */}
 
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 export default App;

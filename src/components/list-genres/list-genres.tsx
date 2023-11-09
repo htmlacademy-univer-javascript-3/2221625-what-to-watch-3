@@ -43,37 +43,31 @@ function ListGenres(props: ListGenresProps) {
         <li className={`catalog__genres-item ${activeTab === 'All genres' ? 'catalog__genres-item--active' : ''}`}>
           <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('All genres')}>All genres</Link>
         </li>
-        <li className={`catalog__genres-item ${activeTab === 'Comedies' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Comedies')}>Comedies</Link>
+        <li className={`catalog__genres-item ${activeTab === 'Fantasy' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Fantasy')}>Fantasy</Link>
+        </li>
+        <li className={`catalog__genres-item ${activeTab === 'Comedy' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Comedy')}>Comedy</Link>
+        </li>
+        <li className={`catalog__genres-item ${activeTab === 'Action' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Action')}>Action</Link>
+        </li>
+        <li className={`catalog__genres-item ${activeTab === 'Drama' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Drama')}>Drama</Link>
         </li>
         <li className={`catalog__genres-item ${activeTab === 'Crime' ? 'catalog__genres-item--active' : ''}`}>
           <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Crime')}>Crime</Link>
         </li>
-        <li className={`catalog__genres-item ${activeTab === 'Documentary' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Documentary')}>Documentary</Link>
+        <li className={`catalog__genres-item ${activeTab === 'Adventure' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Adventure')}>Adventure</Link>
         </li>
-        <li className={`catalog__genres-item ${activeTab === 'Dramas' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Dramas')}>Dramas</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Horror' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Horror')}>Horror</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Kids & Family' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Kids & Family')}>Kids & Family</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Romance' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Romance')}>Romance</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Sci-Fi' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Sci-Fi')}>Sci-Fi</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Thrillers' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Thrillers')}>Thrillers</Link>
+        <li className={`catalog__genres-item ${activeTab === 'Thriller' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Thriller')}>Thriller</Link>
         </li>
       </ul>
 
       <div className="catalog__films-list">
-        { <FilmList {...props.filmComps} ></FilmList>}
+        { <FilmList filmComps={props.filmComps} ></FilmList>}
       </div>
 
       <div className="catalog__more">

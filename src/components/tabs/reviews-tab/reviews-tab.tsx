@@ -1,19 +1,15 @@
-import Review from '../../review/review';
-type ReviewsProps={
-    text:string;
-    author:string;
-    date:string;
-    rating:string;
-  }
-function ReviewsTab({reviews}: { reviews: ReviewsProps[] }): JSX.Element{
+import ReviewComp from '../../review/review';
+import { Review} from '../../../types/film'
+function ReviewsTab({reviews}: { reviews: Review[] }): JSX.Element{
   return(
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {reviews.map((review) => (
-          <Review
-            key={`review_${review.author}_${review.date}`}
-            text={review.text}
-            author={review.author}
+          <ReviewComp
+            key={`review_${review.id}`}
+            id={review.id}
+            user={review.user}
+            comment={review.comment}
             date={review.date}
             rating={review.rating}
           />

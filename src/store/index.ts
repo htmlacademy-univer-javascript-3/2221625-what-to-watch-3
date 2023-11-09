@@ -3,6 +3,7 @@ import reducer from './reducer';
 
 
 import {createAPI} from '../services/api';
+import { redirect } from './middelwares/redirect';
 
 
 export const api = createAPI();
@@ -15,5 +16,5 @@ export const store = configureStore({
         thunk: {
         extraArgument: api,
         },
-    })
+    }).concat(redirect)
 })

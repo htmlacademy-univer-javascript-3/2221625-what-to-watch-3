@@ -1,19 +1,19 @@
 type DetailsProps={
-    director:string| undefined;
-    starring:string| undefined;
-    runtime:string| undefined;
-    genre:string| undefined;
-    date:string| undefined;
+    director:string;
+    starring:string[];
+    runtime:number;
+    genre:string;
+    date:number;
   }
 
 function DetailTab({director,starring,runtime,genre,date}: DetailsProps): JSX.Element{
-  const actorsArray = starring ? starring.split(', ') : [];
 
-  const formattedActors = actorsArray.map((actor, index) => (
+
+  const formattedActors = starring.map((actor, index) => (
     <>
-      {actor}{index !== actorsArray.length - 1 && ', '}
-      {index !== actorsArray.length - 1 && <br />}
-      {index !== actorsArray.length - 1 && ' '}
+      {actor}{index !== starring.length - 1 && ', '}
+      {index !== starring.length - 1 && <br />}
+      {index !== starring.length - 1 && ' '}
     </>));
   return(
     <div className="film-card__text film-card__row">

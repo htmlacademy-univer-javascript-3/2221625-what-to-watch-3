@@ -4,12 +4,12 @@ import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
 import { useDispatch } from 'react-redux';
 import { setID } from '../../store/action';
-import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews } from '../../store/api-actions';
+import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews } from '../../store/film-api-actions';
 import { useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-
+import { store } from '../../store/index';
+import {State} from '../../types/state'
 
 function MoviePage():JSX.Element{
   const params = useParams();
@@ -18,9 +18,9 @@ function MoviePage():JSX.Element{
 
   const fetchAndDispatchCurrentFilm = (id: string) => {
     dispatch(setID(id));
-    dispatch(fetchCurrentFilm(id));
-    dispatch(fetchCurrentFilmReviews(id));
-    dispatch(fetchCurrentFilmRecomends(id));
+    store.dispatch(fetchCurrentFilm(id));
+    store.dispatch(fetchCurrentFilmReviews(id));
+    store.dispatch(fetchCurrentFilmRecomends(id));
   };
 
   useEffect(() => {
@@ -34,9 +34,14 @@ function MoviePage():JSX.Element{
   const currentFilmComp = appState.currentFilm;
   const currentReviews = appState.currentFilmReviews;
   const currentRecomends = appState.currentFilmRecomends;
+  const currentError = appState.error;
 
   
-
+  if (currentError!==null)
+  { return(
+      <p>404</p>
+    )
+  }
 
 
 
@@ -52,7 +57,7 @@ function MoviePage():JSX.Element{
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={currentFilmComp?.bgImgPath} alt={currentFilmComp?.name} />
+            <img src={currentFilmComp?.backgroundImage} alt={currentFilmComp?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -83,7 +88,7 @@ function MoviePage():JSX.Element{
               <h2 className="film-card__title">{currentFilmComp?.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{currentFilmComp?.genre}</span>
-                <span className="film-card__year">{currentFilmComp?.date}</span>
+                <span className="film-card__year">{currentFilmComp?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -114,7 +119,7 @@ function MoviePage():JSX.Element{
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {<FilmList {...currentRecomends.slice(0, 4)} ></FilmList>}
+            {<FilmList filmComps={currentRecomends.slice(0, 4)} ></FilmList>}
           </div>
         </section>
 

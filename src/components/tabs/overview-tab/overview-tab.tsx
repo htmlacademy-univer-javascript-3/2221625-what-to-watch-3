@@ -1,13 +1,12 @@
 
 type OverviewProps={
-    score:string | undefined;
-    ratingCount:string| undefined ;
-    description:string | undefined;
-    director:string | undefined;
-    starring:string | undefined;
+    score:number ;
+    ratingCount:number;
+    description:string ;
+    director:string ;
+    starring:string[] ;
   }
 function OverviewTab({score,ratingCount,description,director,starring}: OverviewProps): JSX.Element{
-  const scoreNumber = score ? parseFloat(score.replace(',', '.')) : 0;
   const getRatingText = (filmScore: number) => {
     if (filmScore >= 1 && filmScore < 4) {
       return 'Bad';
@@ -19,19 +18,24 @@ function OverviewTab({score,ratingCount,description,director,starring}: Overview
     return '';
   };
 
-  const actorsArray = starring ? starring.split(', ') : [];
+
 
   let formattedStarring;
-  if (actorsArray.length > 4) {
-    const firstFourActors = actorsArray.slice(0, 4);
-    formattedStarring = (
-      <>
-        {firstFourActors.join(', ')}
-        {' and other'}
-      </>
-    );
+
+  if (starring && starring.length > 0) {
+    if (starring.length > 4) {
+      const firstFourActors = starring.slice(0, 4);
+      formattedStarring = (
+        <>
+          {firstFourActors.join(', ')}
+          {' and other'}
+        </>
+      );
+    } else {
+      formattedStarring = starring.join(', ');
+    }
   } else {
-    formattedStarring = actorsArray.join(', ');
+    formattedStarring = 'No starring information available.';
   }
 
   return(
@@ -39,7 +43,7 @@ function OverviewTab({score,ratingCount,description,director,starring}: Overview
       <div className="film-rating">
         <div className="film-rating__score">{score}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{getRatingText(scoreNumber)}</span>
+          <span className="film-rating__level">{getRatingText(score)}</span>
           <span className="film-rating__count">{ratingCount}</span>
         </p>
       </div>
