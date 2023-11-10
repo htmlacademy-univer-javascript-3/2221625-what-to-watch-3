@@ -1,8 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {State, AppDispatch} from '../types/state'
+import { redirectToRoute} from './action';
 import {loadFilms,  loadPromoFilm, loadCurrentFilm,loadCurrentFilmReviews,loadCurrentFilmRecomends,setFilmsLoadingStatus} from './action';
-import {APIRoute, TIMEOUT_SHOW_ERROR} from '../const'
+import {APIRoute} from '../const'
 
 
 export const fetchFilms = createAsyncThunk<void, undefined, {
@@ -25,12 +26,18 @@ export const fetchFilms = createAsyncThunk<void, undefined, {
     state: State;
     extra: AxiosInstance;
   }>('films/fetchFilms/wtw', async (id, { dispatch, extra: api }) => {
-
+  try{
       const response = await api.get(`${APIRoute.Films}/${id}`);
       const data = response.data;
       dispatch(loadCurrentFilm(data));
-    
-  });
+  }
+  catch (error) {
+    console.log("Navigate")
+    dispatch(redirectToRoute('*'));
+
+  }});
+
+
   export const fetchCurrentFilmReviews = createAsyncThunk<void, string, {
     dispatch: AppDispatch;
     state: State;

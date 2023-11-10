@@ -10,7 +10,6 @@ import {useParams} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { store } from '../../store/index';
 import {State} from '../../types/state'
-
 function MoviePage():JSX.Element{
   const params = useParams();
   const dispatch = useDispatch();
@@ -36,13 +35,9 @@ function MoviePage():JSX.Element{
   const currentRecomends = appState.currentFilmRecomends;
 
   
-
-
-
-
-
-
   const navigate = useNavigate();
+
+
   function playerClick() {
     navigate(`/player/${currentFilmComp?.id ?? ''}`);
   }

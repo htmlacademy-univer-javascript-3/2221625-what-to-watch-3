@@ -13,6 +13,7 @@ import {State} from '../../types/state'
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
 
 
+
  
 import {
   Routes,
@@ -48,10 +49,9 @@ function App(props:MainFilmProps): JSX.Element{
   const promoFilm = appState.promoFilm;
   const isFilmCompsLoaded=useAppSelector((state)=>state.isFilmCompsLoaded);
   const authorizationStatus=useAppSelector((state)=>state.authorizationStatus);
-
  if (isFilmCompsLoaded || authorizationStatus=== AuthorizationStatus.Unknown)
   return(<LoadingPage/>)
-
+  
 
   return(
     <HistoryRouter history={browserHistory}>
@@ -73,6 +73,10 @@ function App(props:MainFilmProps): JSX.Element{
           path='/films/:id'
           element={< MoviePage />}
         />
+         <Route
+          path="*"
+          element={<Page404/>}
+        />
         {/*
         <Route
           path='/films/:id/addreview'
@@ -83,10 +87,7 @@ function App(props:MainFilmProps): JSX.Element{
           element={< Player />}
         />
  
-        <Route
-          path="*"
-          element={<Page404/>}
-        />
+       
         */}
 
       </Routes>
