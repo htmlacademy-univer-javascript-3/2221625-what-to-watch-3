@@ -77,11 +77,12 @@ function App(props:MainFilmProps): JSX.Element{
           path="*"
           element={<Page404/>}
         />
-        {/*
+       
         <Route
           path='/films/:id/addreview'
-          element={< AddReview />}
+          element={< AddReview  promoFilm={promoFilm} />}
         />
+         {/*
         <Route
           path='/player/:id'
           element={< Player />}
