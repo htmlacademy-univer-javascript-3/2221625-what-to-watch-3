@@ -1,7 +1,6 @@
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {State, AppDispatch} from '../types/state'
-import {Comment} from '../types/film'
 import { redirectToRoute} from './action';
 import {loadFilms,  loadPromoFilm, loadCurrentFilm,loadCurrentFilmReviews,loadCurrentFilmRecomends,setFilmsLoadingStatus} from './action';
 import {APIRoute} from '../const'
@@ -75,22 +74,29 @@ extra: AxiosInstance;
 
 });
 
-export const addComment = createAsyncThunk<void, { id: string, comment: Comment }, {
+export const addComment = createAsyncThunk<void, { id: string, comment: string, rating: number }, {
   state: State;
   extra: AxiosInstance;
-  }>('films/fetchPromoFilm/wtw', async ({ id, comment }, { extra: api }) => {
-  
+}>('films/fetchPromoFilm/wtw', 
+  async ({ id, comment, rating }, { extra: api }) => {
     const headers = {
       'X-Token': getToken(),
-    };
-    console.log(comment)
-    console.log(headers)
-    const axiosConfig: AxiosRequestConfig<Comment> = {
-      headers,
+      'Content-Type': 'application/json'
     };
     
-    await api.post(`${APIRoute.Reviews}/${id}`,comment,axiosConfig);
-  });
+
+    const axiosConfig = {
+      headers,
+    };
+
+    const dataToSend = {
+      'comment': comment,
+      'rating': rating
+    };
+    
+    await api.post(`${APIRoute.Reviews}/${id}`, dataToSend, axiosConfig);
+  }
+);
 
 
 

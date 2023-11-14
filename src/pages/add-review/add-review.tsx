@@ -20,7 +20,7 @@ function AddReview({ promoFilm }: { promoFilm: PromoFilm }):JSX.Element{
   const handlePostClick = (event: React.MouseEvent) => {
     event.preventDefault();
     if(params.id)
-      store.dispatch(addComment({ id: params.id, comment: { comment: reviewText, rating: reviewRating } }));
+      store.dispatch(addComment({ id: params.id, comment: reviewText, rating:reviewRating }));
   }
 
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {

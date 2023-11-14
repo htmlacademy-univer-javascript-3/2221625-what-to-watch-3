@@ -1,8 +1,13 @@
+import "react-toastify/dist/ReactToastify.css";
 import axios, {AxiosInstance, AxiosRequestConfig,AxiosResponse, AxiosError} from 'axios';
 import {toast} from 'react-toastify';
 import {StatusCodes} from 'http-status-codes';
 import {getToken} from './token'
-import 'react-toastify/dist/ReactToastify.css';
+
+type DetailMessageType = {
+  type: string;
+  message: string;
+}
 
 const StatusCodeMapping: Record<number, boolean> = {
     [StatusCodes.BAD_REQUEST]: true,
@@ -32,17 +37,17 @@ export const createAPI = (): AxiosInstance => {
     );
 
     api.interceptors.response.use(
-        (response) => response,
-        (error: AxiosError<{error: string}>) => {
-          if (error.response && shouldDisplayError(error.response)) {
-            console.log("Error status:", error.response.status);
-            toast.warn(error.response.data.error);
-          }
-    
-          throw error;
+      (response) => response,
+      (error: AxiosError<DetailMessageType>) => {
+        if (error.response && shouldDisplayError(error.response)) {
+          const detailMessage = (error.response.data);
+  
+          toast.warn(detailMessage.message);
         }
-      );
-    
-      return api;
-
+  
+        throw error;
+      }
+    );
+  
+    return api;
 };
