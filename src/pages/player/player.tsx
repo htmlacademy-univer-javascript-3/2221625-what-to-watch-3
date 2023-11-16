@@ -1,26 +1,13 @@
-import {useParams} from 'react-router-dom';
-type FilmComp = {
-  name: string;
-  date: string;
-  genre: string;
-  id:string;
-  cardImgPath:string;
-  posterImgPath:string;
-  bgImgPath:string;
-  videoPath:string;
-  playerPoster:string;
-  description:string;
-  score:string;
-  ratingCount:string;
-  director:string;
-  starring:string;
-}
-function Player({ filmComps }: { filmComps: Array<FilmComp> }):JSX.Element{
-  const params = useParams();
-  const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
+import { useSelector } from 'react-redux';
+import {State} from '../../types/state'
+function Player():JSX.Element{
+
+  const appState = useSelector((state:State) => state);
+  
+  const currentFilmComp = appState.currentFilm;
   return(
     <div className="player">
-      <video src={currentFilmComp?.videoPath} className="player__video" poster={currentFilmComp?.playerPoster}></video>
+      <video src={currentFilmComp.videoLink} className="player__video" poster={currentFilmComp.posterImage}></video>
 
 
       <button type="button" className="player__exit">Exit</button>

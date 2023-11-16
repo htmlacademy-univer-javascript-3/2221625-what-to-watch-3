@@ -1,16 +1,18 @@
 import {useParams} from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import {useState, ChangeEvent} from 'react';
-import {PromoFilm} from '../../types/film'
 import { store } from '../../store/index';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import {State} from '../../types/state'
 import { addComment} from '../../store/film-api-actions';
 import Header from '../../components/header/header';
 
 
-function AddReview({ promoFilm }: { promoFilm: PromoFilm }):JSX.Element{
+function AddReview():JSX.Element{
+  
   const params = useParams();
-
+  const appState = useSelector((state:State) => state);
+  
+  const currentFilmComp = appState.currentFilm;
 
   
 
@@ -39,7 +41,7 @@ function AddReview({ promoFilm }: { promoFilm: PromoFilm }):JSX.Element{
         <Header/>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={promoFilm.backgroundImage} alt={promoFilm.name} width="218" height="327" />
+          <img src={currentFilmComp.backgroundImage} alt={currentFilmComp.name} width="218" height="327" />
 
         </div>
       </div>

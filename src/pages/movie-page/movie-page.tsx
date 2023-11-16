@@ -4,12 +4,16 @@ import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
 import { useDispatch } from 'react-redux';
 import { setID } from '../../store/action';
-import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews } from '../../store/film-api-actions';
+import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews,addFavoriteFilm} from '../../store/film-api-actions';
 import { useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { store } from '../../store/index';
 import {State} from '../../types/state'
+import {useAppSelector} from '../../hooks';
+import { AuthorizationStatus } from '../../const';
+import Header from '../../components/header/header';
+
 function MoviePage():JSX.Element{
   const params = useParams();
   const dispatch = useDispatch();
@@ -34,12 +38,18 @@ function MoviePage():JSX.Element{
   const currentReviews = appState.currentFilmReviews;
   const currentRecomends = appState.currentFilmRecomends;
 
-  
+  const countFavorite =appState.favoriteFilms.length
   const navigate = useNavigate();
-
+  const authorizationStatus=useAppSelector((state)=>state.authorizationStatus);
 
   function playerClick() {
     navigate(`/player/${currentFilmComp?.id ?? ''}`);
+  }
+  function myListClick() {
+    if (params.id) {
+      store.dispatch(addFavoriteFilm(params.id));
+      
+    }
   }
 
   return(
@@ -52,26 +62,7 @@ function MoviePage():JSX.Element{
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header film-card__head">
-            <div className="logo">
-              <Link to="/" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
-          </header>
+          <Header/>
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -88,14 +79,21 @@ function MoviePage():JSX.Element{
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={myListClick}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{countFavorite}</span>
                 </button>
-                <Link to={currentFilmComp?.id ? `/films/${currentFilmComp.id}/addreview` : '/'} className="btn film-card__button">Add review</Link>
+                    {authorizationStatus === AuthorizationStatus.Auth && (
+                <Link
+                  to={currentFilmComp?.id ? `/films/${currentFilmComp.id}/addreview` : '/'}
+                  className="btn film-card__button"
+                >
+                Add review
+              </Link>
+              )}
               </div>
             </div>
           </div>

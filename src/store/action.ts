@@ -14,6 +14,9 @@ export const loadPromoFilm = createAction<PromoFilm>('data/loadPromoFilm' ) ;
 export const loadCurrentFilm = createAction<FilmComp>('data/loadCurrentFilm' ) ;
 export const loadCurrentFilmReviews = createAction<Review[]>('data/loadCurrentFilmReviews' ) ;
 export const loadCurrentFilmRecomends = createAction<FilmCard[]>('data/loadCurrentFilmRecomends' ) ;
+export const loadFavoriteFilms = createAction<FilmCard[]>('data/loadFavoriteFilms' ) ;
+
+
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization')
 export const redirectToRoute = createAction<string>('site/redirectToRoute')
