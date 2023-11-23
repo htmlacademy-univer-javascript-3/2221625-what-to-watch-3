@@ -35,7 +35,7 @@ function ListGenres(props: ListGenresProps) {
   function handleButtonClick() {
     dispatch(setMore(8));
   }
-
+//s
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
