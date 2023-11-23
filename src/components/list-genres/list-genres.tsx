@@ -5,36 +5,16 @@ import { useDispatch } from 'react-redux';
 import { setGenre, setMore } from '../../store/action';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-type FilmComp = {
-    name: string;
-    date: string;
-    genre: string;
-    id:string;
-    cardImgPath:string;
-    posterImgPath:string;
-    bgImgPath:string;
-    videoPath:string;
-    playerPoster:string;
-    description:string;
-    score:string;
-    ratingCount:string;
-    director:string;
-    starring:string;
-    runtime:string;
-  }
+import {FilmCard} from '../../types/film'
+import {State} from '../../types/state'
 type ListGenresProps = {
-  filmComps: FilmComp[];
+  filmComps: FilmCard[];
 }
-type ListState = {
-  genre: string | undefined;
-  filmComps: FilmComp[];
-  mainFilm:FilmComp | undefined;
-  more :number;
-}
+
 function ListGenres(props: ListGenresProps) {
   const [activeTab, setActiveTab] = useState('All genres');
 
-  const listState = useSelector((state:ListState) => state);
+  const listState = useSelector((state: State) => state);
   const more = listState.more;
 
   const dispatch = useDispatch();
@@ -63,32 +43,26 @@ function ListGenres(props: ListGenresProps) {
         <li className={`catalog__genres-item ${activeTab === 'All genres' ? 'catalog__genres-item--active' : ''}`}>
           <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('All genres')}>All genres</Link>
         </li>
-        <li className={`catalog__genres-item ${activeTab === 'Comedies' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Comedies')}>Comedies</Link>
+        <li className={`catalog__genres-item ${activeTab === 'Fantasy' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Fantasy')}>Fantasy</Link>
+        </li>
+        <li className={`catalog__genres-item ${activeTab === 'Comedy' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Comedy')}>Comedy</Link>
+        </li>
+        <li className={`catalog__genres-item ${activeTab === 'Action' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Action')}>Action</Link>
+        </li>
+        <li className={`catalog__genres-item ${activeTab === 'Drama' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Drama')}>Drama</Link>
         </li>
         <li className={`catalog__genres-item ${activeTab === 'Crime' ? 'catalog__genres-item--active' : ''}`}>
           <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Crime')}>Crime</Link>
         </li>
-        <li className={`catalog__genres-item ${activeTab === 'Documentary' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Documentary')}>Documentary</Link>
+        <li className={`catalog__genres-item ${activeTab === 'Adventure' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Adventure')}>Adventure</Link>
         </li>
-        <li className={`catalog__genres-item ${activeTab === 'Dramas' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Dramas')}>Dramas</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Horror' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Horror')}>Horror</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Kids & Family' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Kids & Family')}>Kids & Family</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Romance' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Romance')}>Romance</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Sci-Fi' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Sci-Fi')}>Sci-Fi</Link>
-        </li>
-        <li className={`catalog__genres-item ${activeTab === 'Thrillers' ? 'catalog__genres-item--active' : ''}`}>
-          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Thrillers')}>Thrillers</Link>
+        <li className={`catalog__genres-item ${activeTab === 'Thriller' ? 'catalog__genres-item--active' : ''}`}>
+          <Link to="/" className="catalog__genres-link" onClick={() => handleGenreClick('Thriller')}>Thriller</Link>
         </li>
       </ul>
 

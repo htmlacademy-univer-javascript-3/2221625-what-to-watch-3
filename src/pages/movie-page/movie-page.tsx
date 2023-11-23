@@ -1,52 +1,43 @@
-import {useParams} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
 import { useDispatch } from 'react-redux';
-import { setGenre } from '../../store/action';
+import { setID } from '../../store/action';
+import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews } from '../../store/film-api-actions';
 import { useEffect } from 'react';
-
-type FilmComp = {
-  name: string;
-  date: string;
-  genre: string;
-  id:string;
-  cardImgPath:string;
-  posterImgPath:string;
-  bgImgPath:string;
-  videoPath:string;
-  playerPoster:string;
-  description:string;
-  score:string;
-  ratingCount:string;
-  director:string;
-  starring:string;
-  runtime:string;
-}
-type Review ={
-
-  text: string;
-  author:string;
-  date: string;
-  rating: string;
-
-}
-type FilmReviews={
-  id: string;
-  reviews: Review[];
-}
-function MoviePage({ filmComps, filmReviewsList }: { filmComps: FilmComp[]; filmReviewsList : FilmReviews[]}):JSX.Element{
+import {useParams} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { store } from '../../store/index';
+import {State} from '../../types/state'
+function MoviePage():JSX.Element{
   const params = useParams();
-  const currentFilmComp = filmComps.find((filmComp) => filmComp.id === params.id);
-  const currentReviews = filmReviewsList.find((filmReviews) => filmReviews.id === params.id);
   const dispatch = useDispatch();
+  
+
+  const fetchAndDispatchCurrentFilm = (id: string) => {
+    dispatch(setID(id));
+    store.dispatch(fetchCurrentFilm(id));
+    store.dispatch(fetchCurrentFilmReviews(id));
+    store.dispatch(fetchCurrentFilmRecomends(id));
+  };
+
   useEffect(() => {
-    dispatch(setGenre(currentFilmComp?.genre || 'All genres'));
-  }, [currentFilmComp?.genre, dispatch]);
+    if (params.id) {
+      fetchAndDispatchCurrentFilm(params.id);
+    }
+  }, [params.id]);
 
+  const appState = useSelector((state:State) => state);
+  
+  const currentFilmComp = appState.currentFilm;
+  const currentReviews = appState.currentFilmReviews;
+  const currentRecomends = appState.currentFilmRecomends;
 
+  
   const navigate = useNavigate();
+
+
   function playerClick() {
     navigate(`/player/${currentFilmComp?.id ?? ''}`);
   }
@@ -56,7 +47,7 @@ function MoviePage({ filmComps, filmReviewsList }: { filmComps: FilmComp[]; film
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={currentFilmComp?.bgImgPath} alt={currentFilmComp?.name} />
+            <img src={currentFilmComp?.backgroundImage} alt={currentFilmComp?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -87,7 +78,7 @@ function MoviePage({ filmComps, filmReviewsList }: { filmComps: FilmComp[]; film
               <h2 className="film-card__title">{currentFilmComp?.name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{currentFilmComp?.genre}</span>
-                <span className="film-card__year">{currentFilmComp?.date}</span>
+                <span className="film-card__year">{currentFilmComp?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -118,7 +109,7 @@ function MoviePage({ filmComps, filmReviewsList }: { filmComps: FilmComp[]; film
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {<FilmList filmComps={filmComps.slice(0, 4)} ></FilmList>}
+            {<FilmList filmComps={currentRecomends.slice(0, 4)} ></FilmList>}
           </div>
         </section>
 

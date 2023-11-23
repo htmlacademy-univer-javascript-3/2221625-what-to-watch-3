@@ -4,32 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setGenre } from '../../store/action';
 import ListGenres from '../../components/list-genres/list-genres';
+import Header from '../../components/header/header';
+import {FilmCard, PromoFilm} from '../../types/film'
 
-type FilmComp = {
-  name: string;
-  date: string;
-  genre: string;
-  id:string;
-  cardImgPath:string;
-  posterImgPath:string;
-  bgImgPath:string;
-  videoPath:string;
-  playerPoster:string;
-  description:string;
-  score:string;
-  ratingCount:string;
-  director:string;
-  starring:string;
-  runtime:string;
-}
 
 type MainProps = {
-  filmComps: FilmComp[];
-  name: string | undefined;
-  date: string | undefined;
-  genre: string | undefined;
-  bgImgPath: string | undefined;
-  posterImgPath:string | undefined;
+  filmComps: FilmCard[];
+  promoFilm: PromoFilm;
 }
 
 
@@ -47,43 +28,22 @@ function Main(props: MainProps): JSX.Element{
     <main>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={props.bgImgPath} alt={props.name} />
+          <img src={props.promoFilm.backgroundImage} alt={props.promoFilm.name} />
         </div>
 
-        <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
-        </header>
+        <Header/>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={props.posterImgPath ?? ''} alt={`${props.name ?? ''} poster`} width="218" height="327" />
+              <img src={props.promoFilm.posterImage ?? ''} alt={`${props.promoFilm.name ?? ''} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.name}</h2>
+              <h2 className="film-card__title">{props.promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.genre}</span>
-                <span className="film-card__year">{props.date}</span>
+                <span className="film-card__genre">{props.promoFilm.genre}</span>
+                <span className="film-card__year">{props.promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
