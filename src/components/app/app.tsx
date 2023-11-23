@@ -10,6 +10,8 @@ import SignIn from '../../pages/sign-in/sign-in';
 import Page404 from '../../pages/404-page/404-page';
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
 import { AuthorizationStatus } from '../../const';
+import {fetchFavoriteFilms } from '../../store/api-actions';
+import { store } from '../../store/index';
 
 import {
   Routes,
@@ -17,13 +19,21 @@ import {
 } from 'react-router-dom';
 
 import PrivateRoute from '../private-route/private-route';
+import { getFilmsDataLoadingStatus } from '../../store/film-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function App(): JSX.Element{
-  const isFilmCompsLoaded=useAppSelector((state)=>state.isFilmCompsLoaded);
-  const authorizationStatus=useAppSelector((state)=>state.authorizationStatus);
- if (isFilmCompsLoaded || authorizationStatus=== AuthorizationStatus.Unknown)
-  return(<LoadingPage/>)
-  
+  const isFilmsLoading = useAppSelector(getFilmsDataLoadingStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  if (isFilmsLoading || authorizationStatus === AuthorizationStatus.Unknown) {
+
+    return(<LoadingPage/>);
+  }
+  if(authorizationStatus === AuthorizationStatus.Auth) {
+    store.dispatch(fetchFavoriteFilms());
+  }
+
 
   return(
     <HistoryRouter history={browserHistory}>
@@ -40,27 +50,26 @@ function App(): JSX.Element{
           path='/mylist'
           element={<PrivateRoute authorizationStatus={authorizationStatus}>< MyList/></PrivateRoute>}
         />
-       
+
         <Route
           path='/films/:id'
           element={< MoviePage />}
         />
-         <Route
+        <Route
           path="*"
           element={<Page404/>}
         />
-       
+
         <Route
           path='/films/:id/addreview'
           element={<PrivateRoute authorizationStatus={authorizationStatus}>< AddReview /></PrivateRoute>}
         />
-      
+
         <Route
           path='/player/:id'
           element={< Player />}
         />
- 
-       
+
 
       </Routes>
     </HistoryRouter>

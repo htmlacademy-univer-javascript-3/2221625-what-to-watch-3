@@ -1,10 +1,7 @@
-import { useSelector } from 'react-redux';
-import {State} from '../../types/state'
+import { useAppSelector } from '../../hooks';
+import { getCurrentFilm } from '../../store/film-data/selectors';
 function Player():JSX.Element{
-
-  const appState = useSelector((state:State) => state);
-  
-  const currentFilmComp = appState.currentFilm;
+  const currentFilmComp = useAppSelector(getCurrentFilm);
   return(
     <div className="player">
       <video src={currentFilmComp.videoLink} className="player__video" poster={currentFilmComp.posterImage}></video>

@@ -1,19 +1,18 @@
-import Header from "../../components/header/header";
+import Header from '../../components/header/header';
 import FilmList from '../../components/film-list/film-list';
 import { useSelector } from 'react-redux';
-import {State} from '../../types/state'
+import { getFavoriteFilms } from '../../store/film-data/selectors';
 
 function MyList():JSX.Element{
-  const appState = useSelector((state:State) => state);
-  
-  const favoriteComps = appState.favoriteFilms;
+  const favoriteComps = useSelector(getFavoriteFilms);
+
   return(
     <div className="user-page">
-     
+
       <Header>
         <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{favoriteComps.length}</span></h1>
       </Header>
-      
+
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 

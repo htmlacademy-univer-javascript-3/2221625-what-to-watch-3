@@ -1,13 +1,13 @@
 import {useRef, FormEvent} from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
-import { loginAction } from '../../store/state-api-actions';
+import { loginAction } from '../../store/api-actions';
 
 function SignIn():JSX.Element{
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const dispatch =useAppDispatch()
+  const dispatch = useAppDispatch();
 
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -20,7 +20,7 @@ function SignIn():JSX.Element{
       }));
     }
   };
-  
+
   return(
     <div className="user-page">
       <header className="page-header user-page__head">
