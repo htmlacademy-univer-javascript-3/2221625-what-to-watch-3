@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
-import { useDispatch } from 'react-redux';
+
 import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews,addFavoriteFilm} from '../../store/api-actions';
 import { useEffect, useCallback } from 'react';
 import {useParams} from 'react-router-dom';
@@ -17,7 +17,7 @@ import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function MoviePage():JSX.Element{
   const params = useParams();
-  const dispatch = useDispatch();
+
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const fetchAndDispatchCurrentFilm = useCallback((id: string) => {
@@ -25,7 +25,7 @@ function MoviePage():JSX.Element{
     store.dispatch(fetchCurrentFilmReviews(id));
     store.dispatch(fetchCurrentFilmRecomends(id));
     setDataLoaded(true);
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (params.id && !dataLoaded) {

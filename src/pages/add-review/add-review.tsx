@@ -7,7 +7,7 @@ import Header from '../../components/header/header';
 
 import { fetchCurrentFilm} from '../../store/api-actions';
 import { useEffect,useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+
 import { useAppSelector } from '../../hooks';
 import { getCurrentFilm, getSendCommentStatus } from '../../store/film-data/selectors';
 
@@ -16,11 +16,11 @@ function AddReview():JSX.Element{
   const params = useParams();
 
   const [dataLoaded, setDataLoaded] = useState(false);
-  const dispatch = useDispatch();
+
   const fetchAndDispatchCurrentFilm = useCallback((id: string) => {
     store.dispatch(fetchCurrentFilm(id));
     setDataLoaded(true);
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (params.id && !dataLoaded) {

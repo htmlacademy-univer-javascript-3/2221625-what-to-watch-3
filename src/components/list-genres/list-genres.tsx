@@ -10,7 +10,7 @@ type ListGenresProps = {
   filmComps: FilmCard[];
 }
 
-function ListGenres(props: ListGenresProps) {
+const ListGenres: React.FC<ListGenresProps> = memo((props: ListGenresProps) => {
   const [activeTab, setActiveTab] = useState('All genres');
 
   const more = useAppSelector(getMore);
@@ -73,6 +73,6 @@ function ListGenres(props: ListGenresProps) {
       </div>
     </section>
   );
-}
-
-export default memo(ListGenres);
+});
+ListGenres.displayName = 'ListGenres';
+export default ListGenres;
