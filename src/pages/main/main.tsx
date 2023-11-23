@@ -5,16 +5,20 @@ import { useDispatch } from 'react-redux';
 import { setGenre } from '../../store/action';
 import ListGenres from '../../components/list-genres/list-genres';
 import Header from '../../components/header/header';
-import {FilmCard, PromoFilm} from '../../types/film'
+import { addFavoriteFilm} from '../../store/film-api-actions';
+import { useSelector } from 'react-redux';
+import {State} from '../../types/state';
+import { store } from '../../store/index';
 
 
-type MainProps = {
-  filmComps: FilmCard[];
-  promoFilm: PromoFilm;
-}
 
 
-function Main(props: MainProps): JSX.Element{
+function Main(): JSX.Element{
+  const appState = useSelector((state:State) => state);
+  
+  const filmComps = appState.filtredFilmComps;
+  const promoFilm = appState.promoFilm;
+  const countFavorite =appState.favoriteFilms.length
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,11 +28,20 @@ function Main(props: MainProps): JSX.Element{
   function playerClick() {
     navigate('/player/0');
   }
+
+  function myListClick() {
+    if (promoFilm.id) {
+      store.dispatch(addFavoriteFilm(promoFilm.id));
+      
+    }
+  }
+
+
   return(
     <main>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={props.promoFilm.backgroundImage} alt={props.promoFilm.name} />
+          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
         </div>
 
         <Header/>
@@ -36,14 +49,14 @@ function Main(props: MainProps): JSX.Element{
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={props.promoFilm.posterImage ?? ''} alt={`${props.promoFilm.name ?? ''} poster`} width="218" height="327" />
+              <img src={promoFilm.posterImage ?? ''} alt={`${promoFilm.name ?? ''} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.promoFilm.name}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.promoFilm.genre}</span>
-                <span className="film-card__year">{props.promoFilm.released}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -53,12 +66,12 @@ function Main(props: MainProps): JSX.Element{
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+                <button className="btn btn--list film-card__button" type="button" onClick={myListClick}>
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{countFavorite}</span>
                 </button>
               </div>
             </div>
@@ -67,7 +80,7 @@ function Main(props: MainProps): JSX.Element{
       </section>
 
       <div className="page-content">
-        <ListGenres filmComps={props.filmComps} />
+        <ListGenres filmComps={filmComps} />
 
         <footer className="page-footer">
           <div className="logo">

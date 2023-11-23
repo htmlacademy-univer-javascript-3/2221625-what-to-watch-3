@@ -1,6 +1,6 @@
 import { createReducer} from '@reduxjs/toolkit';
 import {loadCurrentFilmRecomends, loadCurrentFilmReviews, setGenre} from './action';
-import {setMore,  setID,requireAuthorization, setFilmsLoadingStatus} from './action';
+import {setMore,  setID,requireAuthorization, setFilmsLoadingStatus, loadFavoriteFilms} from './action';
 import { loadFilms,loadPromoFilm,loadCurrentFilm } from './action';
 import {FilmCard, PromoFilm, FilmComp} from '../types/film'
 
@@ -17,6 +17,7 @@ const initialState:State = {
   currentFilm:{} as FilmComp,
   currentFilmReviews: [],
   currentFilmRecomends: [],
+  favoriteFilms: [],
   more: 8,
   authorizationStatus: AuthorizationStatus.Unknown,
 };
@@ -69,6 +70,10 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadCurrentFilmRecomends, (state, action) => {
       const { payload } = action;
       state.currentFilmRecomends=payload
+    })
+    .addCase(loadFavoriteFilms, (state, action) => {
+      const { payload } = action;
+      state.favoriteFilms=payload
     })
     .addCase(requireAuthorization, (state, action) => {
       const { payload } = action;

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { requireAuthorization, redirectToRoute} from './action';
+import {fetchFavoriteFilms} from './film-api-actions'
 import { AxiosInstance } from 'axios';
 import { saveToken, dropToken } from '../services/token';
 import {State, AppDispatch} from '../types/state'
@@ -38,6 +39,7 @@ createAsyncThunk<void, AuthData,
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email,    password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(fetchFavoriteFilms());
     dispatch(redirectToRoute('/'));
 },
 );

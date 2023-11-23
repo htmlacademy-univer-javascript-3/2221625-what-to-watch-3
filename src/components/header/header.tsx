@@ -5,7 +5,7 @@ import { logoutAction  } from '../../store/state-api-actions';
 import { AuthorizationStatus } from '../../const';
 
 
-function Header(): JSX.Element{
+function Header(props: React.PropsWithChildren<{}>): JSX.Element{
     const authorizationStatus=useAppSelector((state)=>state.authorizationStatus);
 
 
@@ -16,7 +16,9 @@ function Header(): JSX.Element{
         <>
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header film-card__head">
+
+
+        <header className="page-header user-page__head">
         <div className="logo">
             <Link to='/' className="logo__link">
             <span className="logo__letter logo__letter--1">W</span>
@@ -24,6 +26,7 @@ function Header(): JSX.Element{
             <span className="logo__letter logo__letter--3">W</span>
             </Link>
         </div>
+        {props.children}
         {authorizationStatus === AuthorizationStatus.Auth ? (
         <ul className="user-block">
             <li className="user-block__item">
@@ -49,10 +52,11 @@ function Header(): JSX.Element{
 
             </li>
         </ul>
-           
+                
 
     )}
         </header>
+    
         </>
     )
 }

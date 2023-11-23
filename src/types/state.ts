@@ -11,6 +11,7 @@ export type State = {
     currentFilm:FilmComp;
     currentFilmReviews:Review[];
     currentFilmRecomends:FilmCard[];
+    favoriteFilms:FilmCard[];
     more :number;
     authorizationStatus: AuthorizationStatus,
   }
