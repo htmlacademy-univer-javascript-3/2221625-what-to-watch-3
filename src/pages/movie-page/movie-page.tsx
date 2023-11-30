@@ -2,62 +2,69 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
-import { useDispatch } from 'react-redux';
-import { setID } from '../../store/action';
-import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews,addFavoriteFilm} from '../../store/film-api-actions';
-import { useEffect } from 'react';
+
+import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews,addFavoriteFilm} from '../../store/api-actions';
+import { useEffect, useCallback } from 'react';
 import {useParams} from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { store } from '../../store/index';
-import {State} from '../../types/state'
 import {useAppSelector} from '../../hooks';
 import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
+import { useState } from 'react';
+import LoadingPage from '../../pages/LoadingPage/LoadingPage';
+import { getCurrentFilm, getCurrentFilmDataLoadingStatus, getCurrentFilmRecomends, getCurrentFilmRecomendsDataLoadingStatus, getCurrentFilmReviews, getCurrentFilmReviewsDataLoadingStatus, getFavoriteFilms } from '../../store/film-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function MoviePage():JSX.Element{
   const params = useParams();
-  const dispatch = useDispatch();
-  
 
-  const fetchAndDispatchCurrentFilm = (id: string) => {
-    dispatch(setID(id));
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  const fetchAndDispatchCurrentFilm = useCallback((id: string) => {
     store.dispatch(fetchCurrentFilm(id));
     store.dispatch(fetchCurrentFilmReviews(id));
     store.dispatch(fetchCurrentFilmRecomends(id));
-  };
+    setDataLoaded(true);
+  }, []);
 
   useEffect(() => {
-    if (params.id) {
+    if (params.id && !dataLoaded) {
       fetchAndDispatchCurrentFilm(params.id);
     }
-  }, [params.id]);
+  }, [params.id, fetchAndDispatchCurrentFilm, dataLoaded]);
+  const currentFilm = useAppSelector(getCurrentFilm);
+  const currentFilmReviews = useAppSelector(getCurrentFilmReviews);
+  const currentFilmRecomends = useAppSelector(getCurrentFilmRecomends);
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
 
-  const appState = useSelector((state:State) => state);
-  
-  const currentFilmComp = appState.currentFilm;
-  const currentReviews = appState.currentFilmReviews;
-  const currentRecomends = appState.currentFilmRecomends;
-
-  const countFavorite =appState.favoriteFilms.length
   const navigate = useNavigate();
-  const authorizationStatus=useAppSelector((state)=>state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   function playerClick() {
-    navigate(`/player/${currentFilmComp?.id ?? ''}`);
+    navigate(`/player/${currentFilm?.id ?? ''}`);
   }
+
   function myListClick() {
     if (params.id) {
       store.dispatch(addFavoriteFilm(params.id));
-      
     }
   }
+
+  const isFilmLoaded = useAppSelector(getCurrentFilmDataLoadingStatus);
+  const isFilmReviewsLoaded = useAppSelector(getCurrentFilmReviewsDataLoadingStatus);
+  const isFilmRecomendsLoaded = useAppSelector(getCurrentFilmRecomendsDataLoadingStatus);
+
+  if (isFilmLoaded || isFilmReviewsLoaded || isFilmRecomendsLoaded) {
+    return(<LoadingPage/>);
+  }
+
 
   return(
     <>
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={currentFilmComp?.backgroundImage} alt={currentFilmComp?.name} />
+            <img src={currentFilm?.backgroundImage} alt={currentFilm?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -66,10 +73,10 @@ function MoviePage():JSX.Element{
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">{currentFilmComp?.name}</h2>
+              <h2 className="film-card__title">{currentFilm?.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{currentFilmComp?.genre}</span>
-                <span className="film-card__year">{currentFilmComp?.released}</span>
+                <span className="film-card__genre">{currentFilm?.genre}</span>
+                <span className="film-card__year">{currentFilm?.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -84,22 +91,22 @@ function MoviePage():JSX.Element{
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">{countFavorite}</span>
+                  <span className="film-card__count">{favoriteFilms.length}</span>
                 </button>
-                    {authorizationStatus === AuthorizationStatus.Auth && (
-                <Link
-                  to={currentFilmComp?.id ? `/films/${currentFilmComp.id}/addreview` : '/'}
-                  className="btn film-card__button"
-                >
+                {authorizationStatus === AuthorizationStatus.Auth && (
+                  <Link
+                    to={currentFilm?.id ? `/films/${currentFilm.id}/addreview` : '/'}
+                    className="btn film-card__button"
+                  >
                 Add review
-              </Link>
-              )}
+                  </Link>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        <Tabs currentFilmComp={currentFilmComp} currentReviews={currentReviews}></Tabs>
+        <Tabs currentFilmComp={currentFilm} currentReviews={currentFilmReviews}></Tabs>
       </section>
 
       <div className="page-content">
@@ -107,7 +114,7 @@ function MoviePage():JSX.Element{
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {<FilmList filmComps={currentRecomends.slice(0, 4)} ></FilmList>}
+            {<FilmList filmComps={currentFilmRecomends.slice(0, 4)} ></FilmList>}
           </div>
         </section>
 

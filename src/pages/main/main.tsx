@@ -1,24 +1,22 @@
 
-import { useEffect } from 'react';
+import { useEffect,useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setGenre } from '../../store/action';
+import { setGenre} from '../../store/film-data/film-data';
 import ListGenres from '../../components/list-genres/list-genres';
 import Header from '../../components/header/header';
-import { addFavoriteFilm} from '../../store/film-api-actions';
-import { useSelector } from 'react-redux';
-import {State} from '../../types/state';
+import { addFavoriteFilm} from '../../store/api-actions';
+import {useAppSelector} from '../../hooks';
 import { store } from '../../store/index';
-
-
+import { getFavoriteFilms, getFilms, getPromoFilm } from '../../store/film-data/selectors';
 
 
 function Main(): JSX.Element{
-  const appState = useSelector((state:State) => state);
-  
-  const filmComps = appState.filtredFilmComps;
-  const promoFilm = appState.promoFilm;
-  const countFavorite =appState.favoriteFilms.length
+  const films = useAppSelector(getFilms);
+  const promoFilm = useAppSelector(getPromoFilm);
+  const favoriteFilms = useAppSelector(getFavoriteFilms);
+
+  const countFavorite = favoriteFilms.length;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -32,10 +30,10 @@ function Main(): JSX.Element{
   function myListClick() {
     if (promoFilm.id) {
       store.dispatch(addFavoriteFilm(promoFilm.id));
-      
+
     }
   }
-
+  const memoizedListGenres = useMemo(() => <ListGenres filmComps={films} />, [films]);
 
   return(
     <main>
@@ -80,7 +78,7 @@ function Main(): JSX.Element{
       </section>
 
       <div className="page-content">
-        <ListGenres filmComps={filmComps} />
+        {memoizedListGenres}
 
         <footer className="page-footer">
           <div className="logo">

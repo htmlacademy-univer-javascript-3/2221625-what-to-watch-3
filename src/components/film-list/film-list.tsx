@@ -18,3 +18,4 @@ function FilmList({ filmComps }:{ filmComps:FilmCard[]}): JSX.Element {
 
 export default FilmList;
 
+

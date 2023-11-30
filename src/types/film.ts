@@ -1,11 +1,11 @@
-export  type FilmCard = {
+export type FilmCard = {
   id: string;
-  name:  string;
-  previewImage:  string;
+  name: string;
+  previewImage: string;
   previewVideoLink: string;
-  genre:  string;
+  genre: string;
   }
-export  type PromoFilm = {
+export type PromoFilm = {
   id: string;
   name: string;
   posterImage: string;
@@ -16,7 +16,7 @@ export  type PromoFilm = {
   isFavorite: boolean;
 }
 
-export  type FilmComp = {
+export type FilmComp = {
   id: string;
   name: string;
   posterImage: string;

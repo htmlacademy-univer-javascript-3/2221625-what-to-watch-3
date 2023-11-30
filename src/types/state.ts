@@ -1,19 +1,28 @@
-import {FilmCard, PromoFilm, FilmComp, Review} from './film'
+import {FilmCard, PromoFilm, FilmComp, Review} from './film';
 import {store} from '../store/index';
 import { AuthorizationStatus } from '../const';
-export type State = {
-    id:string | undefined;
-    genre: string ;
-    filmComps: FilmCard[];
-    isFilmCompsLoaded:boolean;
-    filtredFilmComps: FilmCard[];
-    promoFilm: PromoFilm;
-    currentFilm:FilmComp;
-    currentFilmReviews:Review[];
-    currentFilmRecomends:FilmCard[];
-    favoriteFilms:FilmCard[];
-    more :number;
-    authorizationStatus: AuthorizationStatus,
-  }
+export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+};
+export type DataProcess = {
+  genre:string;
+  more: number;
+  filtredFilmComps: FilmCard[];
+  films: FilmCard[];
+  promoFilm: PromoFilm;
+  currentFilm:FilmComp;
+  currentFilmReviews: Review[];
+  currentFilmRecomends: FilmCard[];
+  favoriteFilms: FilmCard[];
+  filmsLoadingStatus: boolean;
+  promoFilmLoadingStatus: boolean;
+  currentFilmLoadingStatus: boolean;
+  currentFilmReviewsLoadingStatus: boolean;
+  currentFilmRecomendsLoadingStatus: boolean;
+  favoriteFilmsLoadingStatus: boolean;
+  sendCommentStatus:boolean;
+}

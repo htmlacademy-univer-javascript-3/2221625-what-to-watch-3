@@ -19,7 +19,6 @@ function OverviewTab({score,ratingCount,description,director,starring}: Overview
   };
 
 
-
   let formattedStarring;
 
   if (starring && starring.length > 0) {

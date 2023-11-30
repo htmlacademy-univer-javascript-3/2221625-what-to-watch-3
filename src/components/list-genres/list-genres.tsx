@@ -1,21 +1,19 @@
-import { useState} from 'react';
+import { memo,useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FilmList from '../film-list/film-list';
 import { useDispatch } from 'react-redux';
-import { setGenre, setMore } from '../../store/action';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import {FilmCard} from '../../types/film'
-import {State} from '../../types/state'
+import { setGenre, setMore } from '../../store/film-data/film-data';
+import {FilmCard} from '../../types/film';
+import { getMore } from '../../store/film-data/selectors';
+import { useAppSelector } from '../../hooks';
 type ListGenresProps = {
   filmComps: FilmCard[];
 }
 
-function ListGenres(props: ListGenresProps) {
+const ListGenres: React.FC<ListGenresProps> = memo((props: ListGenresProps) => {
   const [activeTab, setActiveTab] = useState('All genres');
 
-  const listState = useSelector((state: State) => state);
-  const more = listState.more;
+  const more = useAppSelector(getMore);
 
   const dispatch = useDispatch();
 
@@ -74,6 +72,6 @@ function ListGenres(props: ListGenresProps) {
       </div>
     </section>
   );
-}
-
+});
+ListGenres.displayName = 'ListGenres';
 export default ListGenres;

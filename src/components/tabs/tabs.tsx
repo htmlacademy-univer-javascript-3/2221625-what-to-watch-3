@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import OverviewTab from './overview-tab/overview-tab';
 import DetailTab from './details-tab/details-tab';
 import ReviewsTab from './reviews-tab/reviews-tab';
-import { FilmComp,Review} from '../../types/film'
-
+import { FilmComp,Review} from '../../types/film';
 
 
 type TabsProps = {
