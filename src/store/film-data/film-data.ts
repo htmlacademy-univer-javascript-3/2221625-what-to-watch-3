@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FilmCard, FilmComp, PromoFilm, Review } from '../../types/film';
-import {fetchFilms,fetchPromoFilm, fetchCurrentFilm,fetchCurrentFilmReviews,fetchCurrentFilmRecomends,fetchFavoriteFilms,addComment} from '../api-actions';
-import {DataProcess} from '../../types/state';
+import { fetchFilms, fetchPromoFilm, fetchCurrentFilm, fetchCurrentFilmReviews, fetchCurrentFilmRecomends, fetchFavoriteFilms, addComment } from '../api-actions';
+import { DataProcess } from '../../types/state';
 
 
 const initialState: DataProcess = {

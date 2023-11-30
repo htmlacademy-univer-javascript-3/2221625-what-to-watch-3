@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import VideoPlayer from '../videoPlayer/videoPlayer';
-import {FilmCard} from '../../types/film';
+import { FilmCard } from '../../types/film';
 
 
 function Card({cardProps}: {cardProps:FilmCard}): JSX.Element{

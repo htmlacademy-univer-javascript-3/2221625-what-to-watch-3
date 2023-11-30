@@ -1,5 +1,5 @@
-import {useParams} from 'react-router-dom';
-import {useState, ChangeEvent} from 'react';
+import { useParams } from 'react-router-dom';
+import { useState, ChangeEvent } from 'react';
 import { store } from '../../store/index';
 
 import { addComment} from '../../store/api-actions';
@@ -11,7 +11,7 @@ import { useEffect,useCallback } from 'react';
 import { useAppSelector } from '../../hooks';
 import { getCurrentFilm, getSendCommentStatus } from '../../store/film-data/selectors';
 
-function AddReview():JSX.Element{
+function AddReview(): JSX.Element{
 
   const params = useParams();
 

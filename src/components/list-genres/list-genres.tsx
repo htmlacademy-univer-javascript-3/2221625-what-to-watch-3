@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import FilmList from '../film-list/film-list';
 import { useDispatch } from 'react-redux';
 import { setGenre, setMore } from '../../store/film-data/film-data';
-import {FilmCard} from '../../types/film';
+import { FilmCard } from '../../types/film';
 import { getMore } from '../../store/film-data/selectors';
 import { useAppSelector } from '../../hooks';
 type ListGenresProps = {
@@ -11,6 +11,7 @@ type ListGenresProps = {
 }
 
 const ListGenres: React.FC<ListGenresProps> = memo((props: ListGenresProps) => {
+  
   const [activeTab, setActiveTab] = useState('All genres');
 
   const more = useAppSelector(getMore);
@@ -73,5 +74,5 @@ const ListGenres: React.FC<ListGenresProps> = memo((props: ListGenresProps) => {
     </section>
   );
 });
-ListGenres.displayName = 'ListGenres';
+ListGenres.displayName = 'ListGenresMemo';
 export default ListGenres;

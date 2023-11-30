@@ -1,38 +1,22 @@
-
-import { useEffect,useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setGenre} from '../../store/film-data/film-data';
 import ListGenres from '../../components/list-genres/list-genres';
 import Header from '../../components/header/header';
-import { addFavoriteFilm} from '../../store/api-actions';
-import {useAppSelector} from '../../hooks';
-import { store } from '../../store/index';
-import { getFavoriteFilms, getFilms, getPromoFilm } from '../../store/film-data/selectors';
+import MyListButton from '../../components/myList-button/myList-button';
+import { useAppSelector } from '../../hooks';
+import { getFilms, getPromoFilm } from '../../store/film-data/selectors';
 
 
 function Main(): JSX.Element{
   const films = useAppSelector(getFilms);
   const promoFilm = useAppSelector(getPromoFilm);
-  const favoriteFilms = useAppSelector(getFavoriteFilms);
 
-  const countFavorite = favoriteFilms.length;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setGenre('All genres'));
-  }, [dispatch]);
-
   function playerClick() {
-    navigate('/player/0');
+    navigate(`/player/${promoFilm.id}`);
   }
 
-  function myListClick() {
-    if (promoFilm.id) {
-      store.dispatch(addFavoriteFilm(promoFilm.id));
 
-    }
-  }
   const memoizedListGenres = useMemo(() => <ListGenres filmComps={films} />, [films]);
 
   return(
@@ -64,13 +48,7 @@ function Main(): JSX.Element{
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={myListClick}>
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{countFavorite}</span>
-                </button>
+                <MyListButton FilmId={promoFilm.id}/>
               </div>
             </div>
           </div>

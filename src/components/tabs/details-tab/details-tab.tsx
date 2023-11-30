@@ -1,9 +1,9 @@
 type DetailsProps={
-    director:string;
-    starring:string[];
-    runtime:number;
-    genre:string;
-    date:number;
+    director: string;
+    starring: string[];
+    runtime: number;
+    genre: string;
+    date: number;
   }
 
 function DetailTab({director,starring,runtime,genre,date}: DetailsProps): JSX.Element{

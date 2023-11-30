@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
-import { fetchFilms, fetchPromoFilm } from './store/api-actions';
-import { checkAuthAction } from './store/api-actions';
+import { fetchFilms, fetchPromoFilm, checkAuthAction } from './store/api-actions';
 import { ToastContainer } from 'react-toastify';
 
 
