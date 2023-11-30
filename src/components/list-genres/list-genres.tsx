@@ -33,7 +33,6 @@ const ListGenres: React.FC<ListGenresProps> = memo((props: ListGenresProps) => {
   function handleButtonClick() {
     dispatch(setMore(8));
   }
-
   return (
     <section className="catalog">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
