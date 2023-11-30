@@ -1,9 +1,9 @@
-import { useState} from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import OverviewTab from './overview-tab/overview-tab';
 import DetailTab from './details-tab/details-tab';
 import ReviewsTab from './reviews-tab/reviews-tab';
-import { FilmComp,Review} from '../../types/film';
+import { FilmComp, Review } from '../../types/film';
 
 
 type TabsProps = {
@@ -12,7 +12,7 @@ type TabsProps = {
 }
 
 
-function Tabs({currentFilmComp,currentReviews} : TabsProps) {
+function Tabs({currentFilmComp,currentReviews} : TabsProps) :JSX.Element{
   const [activeTab, setActiveTab] = useState('overview');
 
   const handleTabClick = (tabName: string) => {

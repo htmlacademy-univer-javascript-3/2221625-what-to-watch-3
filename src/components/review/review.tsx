@@ -1,4 +1,4 @@
-import { Review} from '../../types/film';
+import { Review } from '../../types/film';
 function ReviewComp({comment,user,date,rating}: Review): JSX.Element{
   return(
     <div className="review">

@@ -5,13 +5,14 @@ import Player from '../../pages/player/player';
 import MyList from '../../pages/my-list/my-list';
 import HistoryRouter from '../history-route';
 import browserHistory from '../../browser-history';
-import {useAppSelector} from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import SignIn from '../../pages/sign-in/sign-in';
 import Page404 from '../../pages/404-page/404-page';
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
 import { AuthorizationStatus } from '../../const';
-import {fetchFavoriteFilms } from '../../store/api-actions';
+import { fetchFavoriteFilms } from '../../store/api-actions';
 import { store } from '../../store/index';
+import { useEffect } from 'react';
 
 import {
   Routes,
@@ -26,13 +27,18 @@ function App(): JSX.Element{
   const isFilmsLoading = useAppSelector(getFilmsDataLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      store.dispatch(fetchFavoriteFilms());
+    }
+  }, [authorizationStatus]);
+
   if (isFilmsLoading || authorizationStatus === AuthorizationStatus.Unknown) {
 
     return(<LoadingPage/>);
   }
-  if(authorizationStatus === AuthorizationStatus.Auth) {
-    store.dispatch(fetchFavoriteFilms());
-  }
+
+  
 
 
   return(
@@ -40,20 +46,20 @@ function App(): JSX.Element{
       <Routes>
         <Route
           path='/'
-          element={< Main />}
+          element={<Main/>}
         />
         <Route
           path='/login'
-          element={< SignIn/>}
+          element={<SignIn/>}
         />
         <Route
           path='/mylist'
-          element={<PrivateRoute authorizationStatus={authorizationStatus}>< MyList/></PrivateRoute>}
+          element={<PrivateRoute><MyList/></PrivateRoute>}
         />
 
         <Route
           path='/films/:id'
-          element={< MoviePage />}
+          element={< MoviePage/>}
         />
         <Route
           path="*"
@@ -62,12 +68,12 @@ function App(): JSX.Element{
 
         <Route
           path='/films/:id/addreview'
-          element={<PrivateRoute authorizationStatus={authorizationStatus}>< AddReview /></PrivateRoute>}
+          element={<PrivateRoute><AddReview/></PrivateRoute>}
         />
 
         <Route
           path='/player/:id'
-          element={< Player />}
+          element={<Player/>}
         />
 
 

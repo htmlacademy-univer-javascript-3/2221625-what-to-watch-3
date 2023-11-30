@@ -1,7 +1,7 @@
 import Card from '../card/card';
 import { FilmCard } from '../../types/film';
 
-function FilmList({ filmComps }:{ filmComps:FilmCard[]}): JSX.Element {
+function FilmList({ filmComps }: { filmComps: FilmCard[] }): JSX.Element {
   return (
     <>
       {filmComps.map((element) => (

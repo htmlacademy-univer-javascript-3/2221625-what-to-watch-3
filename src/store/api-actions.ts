@@ -1,15 +1,15 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { AxiosInstance,AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {State, AppDispatch} from '../types/state';
-import {FilmCard, PromoFilm, FilmComp, Review} from '../types/film';
+import { State, AppDispatch } from '../types/state';
+import { FilmCard, PromoFilm, FilmComp, Review } from '../types/film';
 import { redirectToRoute} from './action';
-import {APIRoute} from '../const';
+import { APIRoute } from '../const';
 import { getToken } from '../services/token';
 import { saveToken, dropToken } from '../services/token';
-import {UserData} from '../types/user-data';
-import {AuthData} from '../types/auth-data';
-import {toast} from 'react-toastify';
+import { UserData } from '../types/user-data';
+import { AuthData } from '../types/auth-data';
+import { toast } from 'react-toastify';
 
 
 export const fetchFilms = createAsyncThunk<FilmCard[], void, {
@@ -113,11 +113,11 @@ export const fetchFavoriteFilms = createAsyncThunk<FilmCard[], undefined, {
   }
 );
 
-export const addFavoriteFilm = createAsyncThunk<void, string, {
+export const changeFilmStatus = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
-}>('films/addFavoriteFilm/wtw',
+}>('films/changeFilmStatus/wtw',
   async (id , { dispatch, extra: api }) => {
     const headers = {
       'X-Token': getToken(),
@@ -130,14 +130,14 @@ export const addFavoriteFilm = createAsyncThunk<void, string, {
     try {
       await api.post(`${APIRoute.Favorite}/${id}/1`, axiosConfig);
       dispatch(fetchFavoriteFilms());
-      dispatch(redirectToRoute('/mylist'));
     } catch (error) {
 
       if (error instanceof AxiosError && error.response?.status === 409) {
+
+        await api.post(`${APIRoute.Favorite}/${id}/0`, axiosConfig);
         dispatch(fetchFavoriteFilms());
-        dispatch(redirectToRoute('/mylist'));
       } else{
-        dispatch(redirectToRoute('/mylist'));
+        throw error;
       }
     }
   }
@@ -176,7 +176,7 @@ export const addComment = createAsyncThunk<void, { id: string; comment: string; 
   }
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuthAction = createAsyncThunk<string, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -184,13 +184,14 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuthAction',
   async (_arg, { extra: api }) => {
 
-    await api.get(APIRoute.Login);
+    const response = await api.get<UserData>(APIRoute.Login);
+    return response.data.avatarUrl;
 
 
   });
 
 export const loginAction =
-createAsyncThunk<void, AuthData,
+createAsyncThunk<string, AuthData,
 {
   dispatch: AppDispatch;
   state: State;
@@ -198,11 +199,13 @@ createAsyncThunk<void, AuthData,
   }>(
     'user/login',
     async ({login: email, password},{dispatch,extra:api}) => {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+      const response = await api.post<UserData>(APIRoute.Login, { email, password });
+      const { token, avatarUrl } = response.data;
       saveToken(token);
 
       dispatch(fetchFavoriteFilms());
       dispatch(redirectToRoute('/'));
+      return avatarUrl;
     },
   );
 

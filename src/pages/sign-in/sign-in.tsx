@@ -1,24 +1,38 @@
-import {useRef, FormEvent} from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks';
+import { getHasError } from '../../store/user-process/selectors';
 
 function SignIn():JSX.Element{
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
+  const [isValid, setIsValid] = useState<boolean>(true);
+  const hasError = useAppSelector(getHasError);
   const dispatch = useAppDispatch();
 
+  const validateInput = (input: string): boolean => {
+    return input.includes('@');
+  };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    
     evt.preventDefault();
-
+    
+    
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value
       }));
     }
+  };
+
+  
+  const submitClick = () => {
+    if(loginRef.current)
+      setIsValid( validateInput(loginRef.current.value))
   };
 
   return(
@@ -37,6 +51,17 @@ function SignIn():JSX.Element{
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+        {(!isValid && !hasError) && (
+            <div className="sign-in__message">
+            <p>Please enter a valid email address</p>
+          </div>
+          )}
+          {(hasError) && (
+            <div className="sign-in__message">
+             <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
+          </div>
+          )}
+        
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input ref={loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" />
@@ -48,7 +73,7 @@ function SignIn():JSX.Element{
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit" >Sign in</button>
+            <button className="sign-in__btn" type="submit" onClick={submitClick}>Sign in</button>
           </div>
         </form>
       </div>

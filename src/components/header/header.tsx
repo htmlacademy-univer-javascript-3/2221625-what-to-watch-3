@@ -3,14 +3,22 @@ import { Link } from 'react-router-dom';
 import { store } from '../../store/index';
 import { logoutAction } from '../../store/api-actions';
 import { AuthorizationStatus } from '../../const';
+import { useNavigate } from 'react-router-dom';
 
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+
+import { getAuthorizationStatus, getAvatarUrl } from '../../store/user-process/selectors';
 
 
 function Header(props: React.PropsWithChildren<object>): JSX.Element{
+  
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const avatarUrl = useAppSelector(getAvatarUrl);
   function logoutClick() {
     store.dispatch(logoutAction());
+  }
+  const navigate = useNavigate();
+  function avatarClick() {
+    navigate('mylist');
   }
   return(
     <>
@@ -26,34 +34,22 @@ function Header(props: React.PropsWithChildren<object>): JSX.Element{
           </Link>
         </div>
         {props.children}
-        {authorizationStatus === AuthorizationStatus.Auth ? (
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
+
+        <ul className="user-block">
+          <li className="user-block__item">
+            <div className="user-block__avatar">
+              <img src={avatarUrl} alt="User avatar" width="63" height="63" onClick={avatarClick}/>
+            </div>
+          </li>
+          <li className="user-block__item">
+            {authorizationStatus === AuthorizationStatus.Auth ? (
               <a className="user-block__link" onClick={logoutClick}>Sign out</a>
-
-            </li>
-          </ul>
-        ) : (
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatarWhat.jpg" alt="?" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
+            ) : (
               <Link to="/login" className="user-block__link">Sign in</Link>
+            )}
+          </li>
+        </ul>
 
-            </li>
-          </ul>
-
-
-        )}
       </header>
 
     </>

@@ -2,17 +2,17 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
-
-import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews,addFavoriteFilm} from '../../store/api-actions';
+import MyListButton from '../../components/myList-button/myList-button';
+import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews } from '../../store/api-actions';
 import { useEffect, useCallback } from 'react';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { store } from '../../store/index';
-import {useAppSelector} from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
 import { useState } from 'react';
 import LoadingPage from '../../pages/LoadingPage/LoadingPage';
-import { getCurrentFilm, getCurrentFilmDataLoadingStatus, getCurrentFilmRecomends, getCurrentFilmRecomendsDataLoadingStatus, getCurrentFilmReviews, getCurrentFilmReviewsDataLoadingStatus, getFavoriteFilms } from '../../store/film-data/selectors';
+import { getCurrentFilm, getCurrentFilmDataLoadingStatus, getCurrentFilmRecomends, getCurrentFilmRecomendsDataLoadingStatus, getCurrentFilmReviews, getCurrentFilmReviewsDataLoadingStatus } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function MoviePage():JSX.Element{
@@ -35,7 +35,6 @@ function MoviePage():JSX.Element{
   const currentFilm = useAppSelector(getCurrentFilm);
   const currentFilmReviews = useAppSelector(getCurrentFilmReviews);
   const currentFilmRecomends = useAppSelector(getCurrentFilmRecomends);
-  const favoriteFilms = useAppSelector(getFavoriteFilms);
 
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -44,11 +43,6 @@ function MoviePage():JSX.Element{
     navigate(`/player/${currentFilm?.id ?? ''}`);
   }
 
-  function myListClick() {
-    if (params.id) {
-      store.dispatch(addFavoriteFilm(params.id));
-    }
-  }
 
   const isFilmLoaded = useAppSelector(getCurrentFilmDataLoadingStatus);
   const isFilmReviewsLoaded = useAppSelector(getCurrentFilmReviewsDataLoadingStatus);
@@ -86,13 +80,7 @@ function MoviePage():JSX.Element{
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button" onClick={myListClick}>
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{favoriteFilms.length}</span>
-                </button>
+                <MyListButton FilmId={params.id || 'empty' }/>
                 {authorizationStatus === AuthorizationStatus.Auth && (
                   <Link
                     to={currentFilm?.id ? `/films/${currentFilm.id}/addreview` : '/'}

@@ -1,10 +1,9 @@
-
 type OverviewProps={
-    score:number ;
-    ratingCount:number;
-    description:string ;
-    director:string ;
-    starring:string[] ;
+    score: number;
+    ratingCount: number;
+    description: string;
+    director: string ;
+    starring: string[];
   }
 function OverviewTab({score,ratingCount,description,director,starring}: OverviewProps): JSX.Element{
   const getRatingText = (filmScore: number) => {
