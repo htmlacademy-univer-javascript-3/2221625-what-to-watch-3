@@ -7,7 +7,7 @@ function ReviewComp({comment,user,date,rating}: Review): JSX.Element{
 
         <footer className="review__details">
           <cite className="review__author">{user}</cite>
-          <time className="review__date" dateTime="2016-12-24">{date}</time>
+          <time className="review__date" dateTime={date}>{new Date(date).toLocaleTimeString('en-EN', { hour: 'numeric', minute: 'numeric', second: 'numeric' })} / {new Date(date).toLocaleDateString('en-EN', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
         </footer>
       </blockquote>
 

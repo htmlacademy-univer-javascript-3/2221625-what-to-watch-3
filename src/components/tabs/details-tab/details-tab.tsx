@@ -1,3 +1,5 @@
+import React from "react";
+
 type DetailsProps={
     director: string;
     starring: string[];
@@ -10,11 +12,11 @@ function DetailTab({director,starring,runtime,genre,date}: DetailsProps): JSX.El
 
 
   const formattedActors = starring.map((actor, index) => (
-    <>
+    <React.Fragment key={index}>
       {actor}{index !== starring.length - 1 && ', '}
       {index !== starring.length - 1 && <br />}
       {index !== starring.length - 1 && ' '}
-    </>));
+    </React.Fragment>));
   return(
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">

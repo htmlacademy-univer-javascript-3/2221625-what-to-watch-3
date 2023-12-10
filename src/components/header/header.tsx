@@ -45,7 +45,7 @@ function Header(props: React.PropsWithChildren<object>): JSX.Element{
             {authorizationStatus === AuthorizationStatus.Auth ? (
               <a className="user-block__link" onClick={logoutClick}>Sign out</a>
             ) : (
-              <Link to="/login" className="user-block__link">Sign in</Link>
+              <Link to="/login" className="user-block__link" data-testid='sign-in-link'>Sign in</Link>
             )}
           </li>
         </ul>

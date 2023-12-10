@@ -19,3 +19,13 @@ export enum Namespace {
     Data = 'DATA',
     User = 'USER',
   }
+
+export enum AppRoute {
+  Login = '/login',
+  MyList = '/mylist',
+  Page404 = '/*',
+  Main = '/',
+  MoviePage = '/films/:id',
+  AddReview='/films/:id/addreview',
+  Player='/player/:id'
+}
