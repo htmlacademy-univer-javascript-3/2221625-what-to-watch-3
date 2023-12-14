@@ -6,7 +6,7 @@ import { addComment, fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFi
 
 import { fakeFilmCards, makeFakeCurrentFilm, makeFakeFilmCard, makeFakePromoFilm, makeFakeReview } from '../../utils/mocks';
 
-const mockFilmCards = fakeFilmCards
+const mockFilmCards = fakeFilmCards;
 
 describe('FilmData Slice', () => {
   const defaultState = {
@@ -19,7 +19,7 @@ describe('FilmData Slice', () => {
     currentFilmReviews: [],
     currentFilmRecomends: [],
     favoriteFilms: [],
-  
+
     filmCardsLoadingStatus: false,
     promoFilmLoadingStatus: false,
     currentFilmLoadingStatus: false,
@@ -31,7 +31,7 @@ describe('FilmData Slice', () => {
 
   it('should return initial state with empty action', () => {
     const emptyAction = { type: '' };
-    const expectedState={ ...defaultState };
+    const expectedState = { ...defaultState };
 
     const result = filmData.reducer(expectedState, emptyAction);
 
@@ -42,22 +42,22 @@ describe('FilmData Slice', () => {
     const expectedState = { ...defaultState };
     const result = filmData.reducer(undefined, emptyAction);
     expect(result).toEqual(expectedState);
-  });  
+  });
   describe('FilmData reducers', () => {
     it('should set "genre" to "Action", "filtredFilmComps" to FilmCard[]  with "setGenre" action', () => {
-      const initialState = { ...defaultState,  filmCards: mockFilmCards };
+      const initialState = { ...defaultState, filmCards: mockFilmCards };
       const expectedState = {
         ...defaultState,
         genre: 'Action',
         filmCards: mockFilmCards,
         filtredFilmComps: [mockFilmCards[0],mockFilmCards[3],mockFilmCards[4],mockFilmCards[5],mockFilmCards[6],mockFilmCards[7],mockFilmCards[8],mockFilmCards[9]],
       };
-      const result = filmData.reducer(initialState, setGenre("Action"));
+      const result = filmData.reducer(initialState, setGenre('Action'));
       expect(result).toEqual(expectedState);
     });
 
     it('should set "genre" to "Drama","more" to -1, "filtredFilmComps" to FilmCard[]  with "setGenre" action', () => {
-      const initialState = { ...defaultState,  filmCards: mockFilmCards };
+      const initialState = { ...defaultState, filmCards: mockFilmCards };
       const expectedState = {
         ...defaultState,
         genre: 'Drama',
@@ -65,12 +65,12 @@ describe('FilmData Slice', () => {
         filmCards: mockFilmCards,
         filtredFilmComps: [mockFilmCards[1],mockFilmCards[12],mockFilmCards[13],mockFilmCards[14]],
       };
-      const result = filmData.reducer(initialState, setGenre("Drama"));
+      const result = filmData.reducer(initialState, setGenre('Drama'));
       expect(result).toEqual(expectedState);
     });
 
     it('should set "genre" to "All genres","more" to 8, "filtredFilmComps" to FilmCard[]  with "setGenre" action', () => {
-      const initialState = { ...defaultState,  filmCards: mockFilmCards };
+      const initialState = { ...defaultState, filmCards: mockFilmCards };
       const expectedState = {
         ...defaultState,
         genre: 'All genres',
@@ -78,12 +78,12 @@ describe('FilmData Slice', () => {
         filmCards: mockFilmCards,
         filtredFilmComps: [mockFilmCards[0],mockFilmCards[1],mockFilmCards[2],mockFilmCards[3],mockFilmCards[4],mockFilmCards[5],mockFilmCards[6],mockFilmCards[7]],
       };
-      const result = filmData.reducer(initialState, setGenre("All genres"));
+      const result = filmData.reducer(initialState, setGenre('All genres'));
       expect(result).toEqual(expectedState);
     });
 
     it('should set "more" to "16", "filtredFilmComps" to FilmCard[]  with "setMore" action', () => {
-      const initialState = { ...defaultState,  filmCards: mockFilmCards };
+      const initialState = { ...defaultState, filmCards: mockFilmCards };
       const expectedState = {
         ...defaultState,
         more:16,
@@ -95,7 +95,7 @@ describe('FilmData Slice', () => {
     });
 
     it('should set "more" to "-1", "filtredFilmComps" to FilmCard[]  with "setMore" action', () => {
-      const initialState = { ...defaultState,  filmCards: mockFilmCards };
+      const initialState = { ...defaultState, filmCards: mockFilmCards };
       const expectedState = {
         ...defaultState,
         more:-1,
@@ -118,7 +118,7 @@ describe('FilmData Slice', () => {
     });
     it('should set "filmCardsLoadingStatus" to "false","films" to FilmCard[] with "fetchFilmCards.fulfilled" action', () => {
       const mockFilmCard = makeFakeFilmCard();
-      const initialState = { ...defaultState,  filmCardsLoadingStatus: true };
+      const initialState = { ...defaultState, filmCardsLoadingStatus: true };
       const expectedState = {
         ...defaultState,
         filmCards: [mockFilmCard],
@@ -127,7 +127,7 @@ describe('FilmData Slice', () => {
       const result = filmData.reducer(
         initialState,
         fetchFilmCards.fulfilled(
-          [mockFilmCard],'', undefined )
+          [mockFilmCard],'', undefined)
       );
       expect(result).toEqual(expectedState);
     });
@@ -143,7 +143,7 @@ describe('FilmData Slice', () => {
     });
     it('should set "filmCardsLoadingStatus" to "false","promoFilm" to PromoFilm with "fetchPromoFilm.fulfilled" action', () => {
       const mockPromoFilm = makeFakePromoFilm();
-      const initialState = { ...defaultState,  promoFilmLoadingStatus: true };
+      const initialState = { ...defaultState, promoFilmLoadingStatus: true };
       const expectedState = {
         ...defaultState,
         promoFilm: mockPromoFilm,
@@ -152,7 +152,7 @@ describe('FilmData Slice', () => {
       const result = filmData.reducer(
         initialState,
         fetchPromoFilm.fulfilled(
-          mockPromoFilm,'', undefined )
+          mockPromoFilm,'', undefined)
       );
       expect(result).toEqual(expectedState);
     });
@@ -168,7 +168,7 @@ describe('FilmData Slice', () => {
     });
     it('should set "currentFilmLoadingStatus" to "false","currentFilm" to FilmComp with "fetchCurrentFilm.fulfilled" action', () => {
       const mockCurrentFilm = makeFakeCurrentFilm();
-      const initialState = { ...defaultState,  currentFilmLoadingStatus: true };
+      const initialState = { ...defaultState, currentFilmLoadingStatus: true };
       const expectedState = {
         ...defaultState,
         currentFilm: mockCurrentFilm,
@@ -177,7 +177,7 @@ describe('FilmData Slice', () => {
       const result = filmData.reducer(
         initialState,
         fetchCurrentFilm.fulfilled(
-          mockCurrentFilm,'', '' )
+          mockCurrentFilm,'', '')
       );
       expect(result).toEqual(expectedState);
     });
@@ -193,7 +193,7 @@ describe('FilmData Slice', () => {
     });
     it('should set "currentFilmReviewsLoadingStatus" to "false","currentFilmReviews" to Review[] with "fetchCurrentFilmReviews.fulfilled" action', () => {
       const mockFakeReview = makeFakeReview();
-      const initialState = { ...defaultState,  currentFilmReviewsLoadingStatus: true };
+      const initialState = { ...defaultState, currentFilmReviewsLoadingStatus: true };
       const expectedState = {
         ...defaultState,
         currentFilmReviews: [mockFakeReview],
@@ -202,7 +202,7 @@ describe('FilmData Slice', () => {
       const result = filmData.reducer(
         initialState,
         fetchCurrentFilmReviews.fulfilled(
-          [mockFakeReview],'', '' )
+          [mockFakeReview],'', '')
       );
       expect(result).toEqual(expectedState);
     });
@@ -218,7 +218,7 @@ describe('FilmData Slice', () => {
     });
     it('should set "currentFilmRecomendsLoadingStatus" to "false","currentFilmRecomends" to FilmCard[] with "fetchCurrentFilmRecomends.fulfilled" action', () => {
       const mockFilmCard = makeFakeFilmCard();
-      const initialState = { ...defaultState,  currentFilmRecomendsLoadingStatus: true };
+      const initialState = { ...defaultState, currentFilmRecomendsLoadingStatus: true };
       const expectedState = {
         ...defaultState,
         currentFilmRecomends: [mockFilmCard],
@@ -227,7 +227,7 @@ describe('FilmData Slice', () => {
       const result = filmData.reducer(
         initialState,
         fetchCurrentFilmRecomends.fulfilled(
-          [mockFilmCard],'', '' )
+          [mockFilmCard],'', '')
       );
       expect(result).toEqual(expectedState);
     });
@@ -242,7 +242,7 @@ describe('FilmData Slice', () => {
     });
     it('should set "favoriteFilmsLoadingStatus" to "false","favoriteFilms" to FilmCard[] with "fetchFavoriteFilms.fulfilled" action', () => {
       const mockFilmCard = makeFakeFilmCard();
-      const initialState = { ...defaultState,  favoriteFilmsLoadingStatus: true };
+      const initialState = { ...defaultState, favoriteFilmsLoadingStatus: true };
       const expectedState = {
         ...defaultState,
         favoriteFilms: [mockFilmCard],
@@ -251,7 +251,7 @@ describe('FilmData Slice', () => {
       const result = filmData.reducer(
         initialState,
         fetchFavoriteFilms.fulfilled(
-          [mockFilmCard],'', undefined )
+          [mockFilmCard],'', undefined)
       );
       expect(result).toEqual(expectedState);
     });
@@ -286,8 +286,8 @@ describe('FilmData Slice', () => {
 });
 
 describe('filterFilmComps Function', () => {
-  
-  
+
+
   it('should filter films by genre when genre is not "All genres"', () => {
     const genre = 'Action';
     const expectedResult = [mockFilmCards[0],mockFilmCards[3],mockFilmCards[4],mockFilmCards[5],mockFilmCards[6],mockFilmCards[7],mockFilmCards[8],mockFilmCards[9],mockFilmCards[10],mockFilmCards[11],mockFilmCards[15],mockFilmCards[16]] ;

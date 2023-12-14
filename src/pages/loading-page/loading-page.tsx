@@ -13,7 +13,7 @@ function LoadingPage(): JSX.Element{
             <span className="logo__letter logo__letter--3">W</span>
           </div>
         </div>
-        <span className="loader"></span>
+        <span className="loader" data-testid="loader"></span>
       </header>
 
 

@@ -48,9 +48,9 @@ function OverviewTab({score,ratingCount,description,director,starring}: Overview
 
       <div className="film-card__text" >
         <div dangerouslySetInnerHTML={{__html:description || ''}}></div>
-        <p className="film-card__director"><strong>Director:{director}</strong></p>
+        <p className="film-card__director" data-testid="owerview Direcrtor"><strong>Director:{director}</strong></p>
 
-        <p className="film-card__starring"><strong>Starring: {formattedStarring}</strong></p>
+        <p className="film-card__starring" data-testid="owerview Starring"><strong>Starring: {formattedStarring}</strong></p>
       </div>
     </>);
 }

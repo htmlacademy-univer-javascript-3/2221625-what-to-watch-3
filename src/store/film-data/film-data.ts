@@ -34,7 +34,8 @@ export const filmData = createSlice({
   name: 'data',
   initialState,
   reducers: {setGenre: (state, action: PayloadAction<string>) => {
-    console.log("test")
+    //в тесте lisy-geners-films даже консоль лог пустой
+    console.log('test');
     const { payload } = action;
     if (payload !== state.genre) {
       state.more = 8 >= filterFilmComps(payload, state.filmCards).length ? -1 : 8;

@@ -3,16 +3,16 @@ import TabsGenres from '../../components/list-genres/tabs-genres';
 import Header from '../../components/header/header';
 import MyListButton from '../../components/myList-button/myList-button';
 import { useAppSelector } from '../../hooks';
-import {  getPromoFilm } from '../../store/film-data/selectors';
+import { getPromoFilm } from '../../store/film-data/selectors';
 import { useMemo } from 'react';
 
 function Main(): JSX.Element{
   const promoFilm = useAppSelector((state) => getPromoFilm(state));
   const memoizedPromoFilm = useMemo(() => promoFilm, [promoFilm]);
-  
+
   const navigate = useNavigate();
   function playerClick() {
-    navigate(`/player/${memoizedPromoFilm.id}`); 
+    navigate(`/player/${memoizedPromoFilm.id}`);
   }
 
   return(

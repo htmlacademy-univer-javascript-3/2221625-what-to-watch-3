@@ -131,7 +131,7 @@ export const changeFilmStatus = createAsyncThunk<void, string, {
       await api.post(`${APIRoute.Favorite}/${id}/1`, axiosConfig);
       dispatch(fetchFavoriteFilms());
     } catch (error) {
-      
+
       if (error instanceof AxiosError && error.response?.status === 409) {
         await api.post(`${APIRoute.Favorite}/${id}/0`, axiosConfig);
         dispatch(fetchFavoriteFilms());

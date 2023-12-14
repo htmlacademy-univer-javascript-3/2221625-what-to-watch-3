@@ -21,7 +21,7 @@ function Tabs({currentFilmComp,currentReviews} : TabsProps) :JSX.Element{
   return (
     <div className="film-card__wrap film-card__translate-top">
       <div className="film-card__info">
-        <div className="film-card__poster film-card__poster--big">
+        <div className="film-card__poster film-card__poster--big" data-testid="posterContainer">
           <img src={currentFilmComp.posterImage} alt={`${currentFilmComp.name } poster`} width="218" height="327" />
         </div>
 
@@ -29,13 +29,13 @@ function Tabs({currentFilmComp,currentReviews} : TabsProps) :JSX.Element{
           <nav className="film-nav film-card__nav">
             <ul className="film-nav__list">
               <li className={`film-nav__item ${activeTab === 'overview' ? 'film-nav__item--active' : ''}`}>
-                <a  className="film-nav__link" onClick={() => handleTabClick('overview')}>Overview</a>
+                <a className="film-nav__link" onClick={() => handleTabClick('overview')}>Overview</a>
               </li>
               <li className={`film-nav__item ${activeTab === 'details' ? 'film-nav__item--active' : ''}`}>
-                <a  className="film-nav__link" onClick={() => handleTabClick('details')}>Details</a>
+                <a className="film-nav__link" onClick={() => handleTabClick('details')}>Details</a>
               </li>
               <li className={`film-nav__item ${activeTab === 'reviews' ? 'film-nav__item--active' : ''}`}>
-                <a  className="film-nav__link" onClick={() => handleTabClick('reviews')}>Reviews</a>
+                <a className="film-nav__link" onClick={() => handleTabClick('reviews')}>Reviews</a>
               </li>
             </ul>
           </nav>

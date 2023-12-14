@@ -9,8 +9,6 @@ function TabsGenres(): JSX.Element{
   };
 
 
-
-
   const memoizedListGenresFilms = useMemo(() => <ListGenresFilms activeTab={activeTab} />, [activeTab]);
   return (
     <section className="catalog">

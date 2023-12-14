@@ -4,7 +4,6 @@ import App from './app';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeCurrentFilm, makeFakeFilmCard, makeFakePromoFilm, makeFakeStore } from '../../utils/mocks';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import React from 'react';
 import SignIn from '../../pages/sign-in/sign-in';
 import MyList from '../../pages/my-list/my-list';
 import MoviePage from '../../pages/movie-page/movie-page';
@@ -20,19 +19,19 @@ describe('Application Routing', () => {
   });
 
   it('should render "Main" when user navigate to "/"', () => {
-    const withHistoryComponent = withHistory(React.createElement(App), mockHistory);
-    const mockPromoFilm=makeFakePromoFilm();
-    const mockFilmCard=makeFakeFilmCard();
+    const withHistoryComponent = withHistory(<App/>, mockHistory);
+    const mockPromoFilm = makeFakePromoFilm();
+    const mockFilmCard = makeFakeFilmCard();
     const { withStoreComponent } = withStore(
-        withHistoryComponent,
-        makeFakeStore({
-          DATA: {
-            ...makeFakeStore().DATA,  
-            promoFilm: mockPromoFilm,  
-            filtredFilmComps:[mockFilmCard]
-          },
-        })
-      );
+      withHistoryComponent,
+      makeFakeStore({
+        DATA: {
+          ...makeFakeStore().DATA,
+          promoFilm: mockPromoFilm,
+          filtredFilmComps:[mockFilmCard]
+        },
+      })
+    );
     mockHistory.push(AppRoute.Main);
 
     render(withStoreComponent);
@@ -42,12 +41,12 @@ describe('Application Routing', () => {
   });
 
   it('should render "SignIn" when user navigate to "/login"', () => {
-    const withHistoryComponent = withHistory(React.createElement(SignIn), mockHistory);
+    const withHistoryComponent = withHistory(<SignIn/>, mockHistory);
     const { withStoreComponent } = withStore(
       withHistoryComponent,
       makeFakeStore()
     );
-    
+
     mockHistory.push(AppRoute.Login);
 
     render(withStoreComponent);
@@ -56,32 +55,32 @@ describe('Application Routing', () => {
   });
 
   it('should render "MyList" when user navigate to "/mylist"', () => {
-    const withHistoryComponent = withHistory(React.createElement(MyList), mockHistory);
+    const withHistoryComponent = withHistory(<MyList/>, mockHistory);
     const { withStoreComponent } = withStore(
       withHistoryComponent,
       makeFakeStore({
-      USER: {
-          ...makeFakeStore().USER,  
-          authorizationStatus: AuthorizationStatus.Auth,  
-          },
+        USER: {
+          ...makeFakeStore().USER,
+          authorizationStatus: AuthorizationStatus.Auth,
+        },
       })
     );
     mockHistory.push(AppRoute.MyList);
 
     render(withStoreComponent);
 
-    expect(screen.getByText("My list")).toBeInTheDocument();
+    expect(screen.getByText('My list')).toBeInTheDocument();
   });
 
   it('should render "MoviePage" when user navigate to "/films/:id"', () => {
-    const withHistoryComponent = withHistory(React.createElement(MoviePage), mockHistory);
-    const mockCurrentFilm= makeFakeCurrentFilm()
+    const withHistoryComponent = withHistory(<MoviePage/>, mockHistory);
+    const mockCurrentFilm = makeFakeCurrentFilm();
     const { withStoreComponent } = withStore(
       withHistoryComponent,
       makeFakeStore({
         DATA: {
-          ...makeFakeStore().DATA,  
-          currentFilm: mockCurrentFilm,  
+          ...makeFakeStore().DATA,
+          currentFilm: mockCurrentFilm,
         },
       })
     );
@@ -93,7 +92,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "Page404" when user navigate to "/*"', () => {
-    const withHistoryComponent = withHistory(React.createElement(Page404), mockHistory);
+    const withHistoryComponent = withHistory(<Page404/>, mockHistory);
     const { withStoreComponent } = withStore(
       withHistoryComponent,
       makeFakeStore()
@@ -102,29 +101,29 @@ describe('Application Routing', () => {
 
     render(withStoreComponent);
 
-    expect(screen.getByText("404 Not Found")).toBeInTheDocument();
+    expect(screen.getByText('404 Not Found')).toBeInTheDocument();
   });
-  
+
   it('should render "AddReview" when user navigate to "/films/:id/addreview"', () => {
-    const withHistoryComponent = withHistory(React.createElement(AddReview), mockHistory);
+    const withHistoryComponent = withHistory(<AddReview/>, mockHistory);
     const { withStoreComponent } = withStore(
       withHistoryComponent,
       makeFakeStore({
-      USER: {
-          ...makeFakeStore().USER,  
-          authorizationStatus: AuthorizationStatus.Auth,  
-          },
+        USER: {
+          ...makeFakeStore().USER,
+          authorizationStatus: AuthorizationStatus.Auth,
+        },
       })
     );
     mockHistory.push(AppRoute.AddReview);
 
     render(withStoreComponent);
 
-    expect(screen.getByText("Review text")).toBeInTheDocument();
+    expect(screen.getByText('Review text')).toBeInTheDocument();
   });
 
   it('should render "Player" when user navigate to "/player"', () => {
-    const withHistoryComponent = withHistory(React.createElement(Player), mockHistory);
+    const withHistoryComponent = withHistory(<Player/>, mockHistory);
     const { withStoreComponent } = withStore(
       withHistoryComponent,
       makeFakeStore()
@@ -133,7 +132,7 @@ describe('Application Routing', () => {
 
     render(withStoreComponent);
 
-    expect(screen.getByText("Transpotting")).toBeInTheDocument();
+    expect(screen.getByText('Transpotting')).toBeInTheDocument();
   });
 
 });

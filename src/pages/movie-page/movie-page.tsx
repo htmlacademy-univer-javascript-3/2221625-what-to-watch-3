@@ -11,7 +11,7 @@ import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../const';
 import Header from '../../components/header/header';
 import { useState } from 'react';
-import LoadingPage from '../../pages/LoadingPage/LoadingPage';
+import LoadingPage from '../loading-page/loading-page';
 import { getCurrentFilm, getCurrentFilmDataLoadingStatus, getCurrentFilmRecomends, getCurrentFilmRecomendsDataLoadingStatus, getCurrentFilmReviews, getCurrentFilmReviewsDataLoadingStatus } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 

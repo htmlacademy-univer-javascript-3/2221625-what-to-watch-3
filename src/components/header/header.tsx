@@ -10,7 +10,7 @@ import { getAuthorizationStatus, getAvatarUrl } from '../../store/user-process/s
 
 
 function Header(props: React.PropsWithChildren<object>): JSX.Element{
-  
+
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const avatarUrl = useAppSelector(getAvatarUrl);
   function logoutClick() {

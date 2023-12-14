@@ -7,7 +7,7 @@ import {HelmetProvider} from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import SignIn from '../../pages/sign-in/sign-in';
 import Page404 from '../../pages/404-page/404-page';
-import LoadingPage from '../../pages/LoadingPage/LoadingPage';
+import LoadingPage from '../../pages/loading-page/loading-page';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { fetchFavoriteFilms } from '../../store/api-actions';
 import { store } from '../../store/index';
@@ -36,8 +36,6 @@ function App(): JSX.Element{
 
     return(<LoadingPage/>);
   }
-
-  
 
 
   return(
