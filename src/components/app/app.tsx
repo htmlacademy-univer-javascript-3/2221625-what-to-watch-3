@@ -22,14 +22,20 @@ import PrivateRoute from '../private-route/private-route';
 import { getFilmCardsDataLoadingStatus } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
+
 function App(): JSX.Element{
+
   const isFilmsLoading = useAppSelector(getFilmCardsDataLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
+    let isMounted = true;
+    if (authorizationStatus === AuthorizationStatus.Auth && isMounted) {
       store.dispatch(fetchFavoriteFilms());
     }
+    return () => {
+      isMounted = false;
+    };
   }, [authorizationStatus]);
 
   if (isFilmsLoading || authorizationStatus === AuthorizationStatus.Unknown) {

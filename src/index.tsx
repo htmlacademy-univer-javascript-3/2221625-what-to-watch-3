@@ -12,7 +12,6 @@ store.dispatch(fetchFilmCards());
 store.dispatch(fetchPromoFilm());
 store.dispatch(checkAuthAction());
 
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

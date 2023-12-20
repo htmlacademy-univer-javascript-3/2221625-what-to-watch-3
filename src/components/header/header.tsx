@@ -18,8 +18,14 @@ function Header(props: React.PropsWithChildren<object>): JSX.Element{
   }
   const navigate = useNavigate();
   function avatarClick() {
-    navigate('mylist');
+    navigate('/mylist');
   }
+  const buttonStyles = {
+    border: 'none',
+    backgroundColor: 'transparent',
+    padding: 0,
+    cursor: 'pointer',
+  };
   return(
     <>
       <h1 className="visually-hidden">WTW</h1>
@@ -43,7 +49,7 @@ function Header(props: React.PropsWithChildren<object>): JSX.Element{
           </li>
           <li className="user-block__item">
             {authorizationStatus === AuthorizationStatus.Auth ? (
-              <a className="user-block__link" onClick={logoutClick}>Sign out</a>
+              <button className="user-block__link" style={buttonStyles} onClick={logoutClick} >Sign out</button>
             ) : (
               <Link to="/login" className="user-block__link" data-testid='sign-in-link'>Sign in</Link>
             )}

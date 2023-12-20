@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, ChangeEvent } from 'react';
-import { store } from '../../store/index';
 
+import { useAppDispatch } from '../../hooks';
 import { addComment} from '../../store/api-actions';
 import Header from '../../components/header/header';
 
@@ -14,19 +14,19 @@ import { getCurrentFilm, getSendCommentStatus } from '../../store/film-data/sele
 function AddReview(): JSX.Element{
 
   const params = useParams();
-
+  const dispatch = useAppDispatch();
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const fetchAndDispatchCurrentFilm = useCallback((id: string) => {
-    store.dispatch(fetchCurrentFilm(id));
+    dispatch(fetchCurrentFilm(id));
     setDataLoaded(true);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (params.id && !dataLoaded) {
       fetchAndDispatchCurrentFilm(params.id);
     }
-  }, [params.id, fetchAndDispatchCurrentFilm,dataLoaded]);
+  }, [params.id, fetchAndDispatchCurrentFilm, dataLoaded]);
 
 
   const currentFilmComp = useAppSelector(getCurrentFilm);
@@ -40,7 +40,7 @@ function AddReview(): JSX.Element{
   const handlePostClick = (event: React.MouseEvent) => {
     event.preventDefault();
     if(params.id) {
-      store.dispatch(addComment({ id: params.id, comment: reviewText, rating:reviewRating }));
+      dispatch(addComment({ id: params.id, comment: reviewText, rating:reviewRating }));
     }
   };
 
@@ -85,6 +85,7 @@ function AddReview(): JSX.Element{
                       id={`star-${ratingValue}`}
                       type="radio"
                       name="rating"
+                      data-testid={`test-star${ratingValue}`}
                       value={ratingValue}
                       checked={reviewRating === ratingValue}
                       onChange={handleRatingChange}
@@ -104,14 +105,15 @@ function AddReview(): JSX.Element{
               className="add-review__textarea"
               name="review-text"
               id="review-text"
-              value={reviewText}
+              data-testid="textarea-test"
+              defaultValue={reviewText}
               onChange={({ target }: ChangeEvent<HTMLTextAreaElement>) => {
                 setReviewText(target.value);
               }}
             >
             </textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit" onClick={handlePostClick} disabled={!isCommentSend || isButtonDisabled} title={title}> Post </button>
+              <button className="add-review__btn" type="submit" data-testid="submitButton" onClick={handlePostClick} disabled={!isCommentSend || isButtonDisabled} title={title}> Post </button>
             </div>
 
           </div>

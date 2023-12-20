@@ -40,8 +40,12 @@ export const createAPI = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<DetailMessageType>) => {
       if (error.response && shouldDisplayError(error.response)) {
-        const detailMessage = (error.message);
-        toast.warn(detailMessage);
+        const requestStatus = error.response.status;
+        if (requestStatus === 401) {
+          toast.warn('Failed to log in');
+        } else if (requestStatus === 400) {
+          toast.warn('Failed to send');
+        }
       }
 
       throw error;

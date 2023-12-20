@@ -1,7 +1,6 @@
 import { render,screen } from '@testing-library/react';
 import Header from './header';
 
-import React from 'react';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeStore } from '../../utils/mocks';
 import { AuthorizationStatus } from '../../const';
@@ -10,9 +9,7 @@ describe('Component: Header', () => {
 
   it('should render correctly', () => {
 
-    const withHistoryComponent = withHistory(<Header>
-      <p>header</p>
-                                             </Header>
+    const withHistoryComponent = withHistory(<Header><p>header</p></Header>
     );
     const { withStoreComponent } = withStore(
       withHistoryComponent,
@@ -28,9 +25,7 @@ describe('Component: Header', () => {
 
   it('should Auth render correctly', () => {
 
-    const withHistoryComponent = withHistory(<Header>
-      <p>header</p>
-                                             </Header>
+    const withHistoryComponent = withHistory(<Header><p>header</p></Header>
     );
     const { withStoreComponent } = withStore(
       withHistoryComponent,
@@ -52,9 +47,7 @@ describe('Component: Header', () => {
 
   it('should No Auth render correctly', () => {
 
-    const withHistoryComponent = withHistory(<Header>
-      <p>header</p>
-                                             </Header>
+    const withHistoryComponent = withHistory(<Header><p>header</p></Header>
     );
     const { withStoreComponent } = withStore(
       withHistoryComponent,

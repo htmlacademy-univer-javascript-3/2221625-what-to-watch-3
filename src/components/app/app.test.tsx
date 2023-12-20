@@ -124,15 +124,22 @@ describe('Application Routing', () => {
 
   it('should render "Player" when user navigate to "/player"', () => {
     const withHistoryComponent = withHistory(<Player/>, mockHistory);
+    const mockCurrentFilm = makeFakeCurrentFilm();
     const { withStoreComponent } = withStore(
       withHistoryComponent,
-      makeFakeStore()
+      makeFakeStore({
+        DATA: {
+          ...makeFakeStore().DATA,
+          currentFilm: mockCurrentFilm,
+
+        },
+      }),
     );
     mockHistory.push(AppRoute.Player);
 
     render(withStoreComponent);
 
-    expect(screen.getByText('Transpotting')).toBeInTheDocument();
+    expect(screen.getByText(mockCurrentFilm.name)).toBeInTheDocument();
   });
 
 });
