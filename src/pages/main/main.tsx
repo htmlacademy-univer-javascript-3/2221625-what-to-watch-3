@@ -1,29 +1,25 @@
-import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ListGenres from '../../components/list-genres/list-genres';
+import TabsGenres from '../../components/list-genres/tabs-genres';
 import Header from '../../components/header/header';
 import MyListButton from '../../components/myList-button/myList-button';
 import { useAppSelector } from '../../hooks';
-import { getFilms, getPromoFilm } from '../../store/film-data/selectors';
-
+import { getPromoFilm } from '../../store/film-data/selectors';
+import { useMemo } from 'react';
 
 function Main(): JSX.Element{
-  const films = useAppSelector(getFilms);
-  const promoFilm = useAppSelector(getPromoFilm);
+  const promoFilm = useAppSelector((state) => getPromoFilm(state));
+  const memoizedPromoFilm = useMemo(() => promoFilm, [promoFilm]);
 
   const navigate = useNavigate();
   function playerClick() {
-    navigate(`/player/${promoFilm.id}`);
+    navigate(`/player/${memoizedPromoFilm.id}`);
   }
-
-
-  const memoizedListGenres = useMemo(() => <ListGenres filmComps={films} />, [films]);
 
   return(
     <main>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
+          <img src={memoizedPromoFilm.backgroundImage} alt={memoizedPromoFilm.name} />
         </div>
 
         <Header/>
@@ -31,14 +27,14 @@ function Main(): JSX.Element{
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={promoFilm.posterImage ?? ''} alt={`${promoFilm.name ?? ''} poster`} width="218" height="327" />
+              <img src={memoizedPromoFilm.posterImage ?? ''} alt={`${memoizedPromoFilm.name ?? ''} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilm.name}</h2>
+              <h2 className="film-card__title">{memoizedPromoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilm.genre}</span>
-                <span className="film-card__year">{promoFilm.released}</span>
+                <span className="film-card__genre">{memoizedPromoFilm.genre}</span>
+                <span className="film-card__year">{memoizedPromoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -48,7 +44,7 @@ function Main(): JSX.Element{
                   </svg>
                   <span>Play</span>
                 </button>
-                <MyListButton FilmId={promoFilm.id}/>
+                <MyListButton FilmId={memoizedPromoFilm.id}/>
               </div>
             </div>
           </div>
@@ -56,7 +52,7 @@ function Main(): JSX.Element{
       </section>
 
       <div className="page-content">
-        {memoizedListGenres}
+        <TabsGenres/>
 
         <footer className="page-footer">
           <div className="logo">

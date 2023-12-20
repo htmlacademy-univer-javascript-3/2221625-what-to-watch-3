@@ -5,8 +5,8 @@ import { FilmCard, FilmComp, PromoFilm, Review } from '../../types/film';
 
 export const getMore = (state: Pick<State, Namespace.Data>): number => state[Namespace.Data].more;
 
-export const getFilms = (state: Pick<State, Namespace.Data>): FilmCard[] => state[Namespace.Data].filtredFilmComps;
-export const getFilmsDataLoadingStatus = (state: Pick<State, Namespace.Data>): boolean => state[Namespace.Data].filmsLoadingStatus;
+export const getFilmCards = (state: Pick<State, Namespace.Data>): FilmCard[] => state[Namespace.Data].filtredFilmComps;
+export const getFilmCardsDataLoadingStatus = (state: Pick<State, Namespace.Data>): boolean => state[Namespace.Data].filmCardsLoadingStatus;
 
 export const getPromoFilm = (state: Pick<State, Namespace.Data>): PromoFilm => state[Namespace.Data].promoFilm;
 export const getPromoFilmDataLoadingStatus = (state: Pick<State, Namespace.Data>): boolean => state[Namespace.Data].promoFilmLoadingStatus;

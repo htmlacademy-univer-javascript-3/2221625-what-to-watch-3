@@ -1,3 +1,5 @@
+import React from 'react';
+
 type DetailsProps={
     director: string;
     starring: string[];
@@ -10,21 +12,21 @@ function DetailTab({director,starring,runtime,genre,date}: DetailsProps): JSX.El
 
 
   const formattedActors = starring.map((actor, index) => (
-    <>
+    <React.Fragment key={`${actor}-ID`}>
       {actor}{index !== starring.length - 1 && ', '}
       {index !== starring.length - 1 && <br />}
       {index !== starring.length - 1 && ' '}
-    </>));
+    </React.Fragment>));
   return(
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
-          <strong className="film-card__details-name">Director</strong>
+          <strong className="film-card__details-name" data-testid="details Direcrtor">Director</strong>
           <span className="film-card__details-value">{director}</span>
         </p>
         <p className="film-card__details-item">
-          <strong className="film-card__details-name">Starring</strong>
-          <span className="film-card__details-value">
+          <strong className="film-card__details-name" data-testid="details Starring">Starring</strong>
+          <span className="film-card__details-value" data-testid="formattedActors">
             {formattedActors}
           </span>
         </p>

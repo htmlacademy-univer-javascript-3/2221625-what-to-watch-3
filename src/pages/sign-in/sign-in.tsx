@@ -12,15 +12,13 @@ function SignIn():JSX.Element{
   const hasError = useAppSelector(getHasError);
   const dispatch = useAppDispatch();
 
-  const validateInput = (input: string): boolean => {
-    return input.includes('@');
-  };
+  const validateInput = (input: string): boolean => input.includes('@');
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    
+
     evt.preventDefault();
-    
-    
+
+
     if (loginRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
         login: loginRef.current.value,
@@ -29,10 +27,11 @@ function SignIn():JSX.Element{
     }
   };
 
-  
+
   const submitClick = () => {
-    if(loginRef.current)
-      setIsValid( validateInput(loginRef.current.value))
+    if(loginRef.current) {
+      setIsValid(validateInput(loginRef.current.value));
+    }
   };
 
   return(
@@ -51,29 +50,29 @@ function SignIn():JSX.Element{
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
-        {(!isValid && !hasError) && (
+          {(!isValid && !hasError) && (
             <div className="sign-in__message">
-            <p>Please enter a valid email address</p>
-          </div>
+              <p>Please enter a valid email address</p>
+            </div>
           )}
           {(hasError) && (
             <div className="sign-in__message">
-             <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
-          </div>
+              <p>We can’t recognize this email <br/> and password combination. Please try again.</p>
+            </div>
           )}
-        
+
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input ref={loginRef} className="sign-in__input" type="email" placeholder="Email address" name="user-email" id="user-email" />
-              <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
+              <label className="sign-in__label visually-hidden" htmlFor="user-email" data-testid="loginElement">Email address</label>
             </div>
             <div className="sign-in__field">
               <input ref={passwordRef} className="sign-in__input" type="password" placeholder="Password" name="user-password" id="user-password" />
-              <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
+              <label className="sign-in__label visually-hidden" htmlFor="user-password" data-testid="passwordElement">Password</label>
             </div>
           </div>
           <div className="sign-in__submit">
-            <button className="sign-in__btn" type="submit" onClick={submitClick}>Sign in</button>
+            <button className="sign-in__btn" type="submit" onClick={submitClick} data-testid="SignButton">Sign in</button>
           </div>
         </form>
       </div>

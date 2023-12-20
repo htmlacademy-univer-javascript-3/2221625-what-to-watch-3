@@ -92,8 +92,8 @@ function Player(): JSX.Element{
   };
 
   const currentContent = isDifferenceMode
-  ? `-${formatTime(Math.abs(duration - currentTime))}`
-  : formatTime(currentTime);
+    ? `-${formatTime(Math.abs(duration - currentTime))}`
+    : formatTime(currentTime);
 
   const progressValue = isNaN(duration) || isNaN(currentTime) || duration === 0 ? 0 : (currentTime / duration) * 100;
 
@@ -104,7 +104,7 @@ function Player(): JSX.Element{
     const newPosition = (clickPosition / progressBar.clientWidth) * 100;
     const newTime = (newPosition / 100) * duration;
     const video = document.getElementById(currentFilmComp.id) as HTMLVideoElement;
-    
+
     if (video) {
       video.currentTime = newTime;
       setCurrentTime(newTime);

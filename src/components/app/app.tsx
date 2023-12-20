@@ -3,13 +3,12 @@ import AddReview from '../../pages/add-review/add-review';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
 import MyList from '../../pages/my-list/my-list';
-import HistoryRouter from '../history-route';
-import browserHistory from '../../browser-history';
+import {HelmetProvider} from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import SignIn from '../../pages/sign-in/sign-in';
 import Page404 from '../../pages/404-page/404-page';
-import LoadingPage from '../../pages/LoadingPage/LoadingPage';
-import { AuthorizationStatus } from '../../const';
+import LoadingPage from '../../pages/loading-page/loading-page';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { fetchFavoriteFilms } from '../../store/api-actions';
 import { store } from '../../store/index';
 import { useEffect } from 'react';
@@ -20,11 +19,11 @@ import {
 } from 'react-router-dom';
 
 import PrivateRoute from '../private-route/private-route';
-import { getFilmsDataLoadingStatus } from '../../store/film-data/selectors';
+import { getFilmCardsDataLoadingStatus } from '../../store/film-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function App(): JSX.Element{
-  const isFilmsLoading = useAppSelector(getFilmsDataLoadingStatus);
+  const isFilmsLoading = useAppSelector(getFilmCardsDataLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
@@ -38,47 +37,45 @@ function App(): JSX.Element{
     return(<LoadingPage/>);
   }
 
-  
-
 
   return(
-    <HistoryRouter history={browserHistory}>
+    <HelmetProvider>
       <Routes>
         <Route
-          path='/'
+          path = {AppRoute.Main}
           element={<Main/>}
         />
         <Route
-          path='/login'
+          path={AppRoute.Login}
           element={<SignIn/>}
         />
         <Route
-          path='/mylist'
+          path={AppRoute.MyList}
           element={<PrivateRoute><MyList/></PrivateRoute>}
         />
 
         <Route
-          path='/films/:id'
+          path={AppRoute.MoviePage}
           element={< MoviePage/>}
         />
         <Route
-          path="*"
+          path={AppRoute.Page404}
           element={<Page404/>}
         />
 
         <Route
-          path='/films/:id/addreview'
+          path={AppRoute.AddReview}
           element={<PrivateRoute><AddReview/></PrivateRoute>}
         />
 
         <Route
-          path='/player/:id'
+          path={AppRoute.Player}
           element={<Player/>}
         />
 
 
       </Routes>
-    </HistoryRouter>
+    </HelmetProvider>
   );
 }
 export default App;

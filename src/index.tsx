@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
-import { fetchFilms, fetchPromoFilm, checkAuthAction } from './store/api-actions';
+import { fetchFilmCards, fetchPromoFilm, checkAuthAction } from './store/api-actions';
 import { ToastContainer } from 'react-toastify';
-
-
-store.dispatch(fetchFilms());
+import HistoryRouter from './components/history-route';
+import browserHistory from './browser-history';
+store.dispatch(fetchFilmCards());
 store.dispatch(fetchPromoFilm());
 store.dispatch(checkAuthAction());
 
@@ -21,9 +21,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer/>
-      <App/>
-
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer/>
+        <App/>
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>
 );

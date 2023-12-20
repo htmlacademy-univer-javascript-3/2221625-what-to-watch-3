@@ -11,7 +11,7 @@ type ListGenresProps = {
 }
 
 const ListGenres: React.FC<ListGenresProps> = memo((props: ListGenresProps) => {
-  
+
   const [activeTab, setActiveTab] = useState('All genres');
 
   const more = useAppSelector(getMore);

@@ -33,7 +33,7 @@ function Card({cardProps}: {cardProps:FilmCard}): JSX.Element{
         {displayedPath === cardProps.previewVideoLink ? (
           <VideoPlayer videoId={cardProps.id} videoPath={displayedPath} mute/>
         ) : (
-          <img src={displayedPath} alt={cardProps.name} width="280" height="175" id={cardProps.id} />
+          <img src={displayedPath} alt={cardProps.name} width="280" height="175" id={cardProps.id} data-testid={`imgTestID ${cardProps.id}`}/>
         )}
       </div>
       <h3 className="small-film-card__title">

@@ -14,13 +14,13 @@ export type DataProcess = {
   genre:string;
   more: number;
   filtredFilmComps: FilmCard[];
-  films: FilmCard[];
+  filmCards: FilmCard[];
   promoFilm: PromoFilm;
   currentFilm: FilmComp;
   currentFilmReviews: Review[];
   currentFilmRecomends: FilmCard[];
   favoriteFilms: FilmCard[];
-  filmsLoadingStatus: boolean;
+  filmCardsLoadingStatus: boolean;
   promoFilmLoadingStatus: boolean;
   currentFilmLoadingStatus: boolean;
   currentFilmReviewsLoadingStatus: boolean;

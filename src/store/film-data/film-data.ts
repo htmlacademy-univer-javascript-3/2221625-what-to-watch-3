@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FilmCard, FilmComp, PromoFilm, Review } from '../../types/film';
-import { fetchFilms, fetchPromoFilm, fetchCurrentFilm, fetchCurrentFilmReviews, fetchCurrentFilmRecomends, fetchFavoriteFilms, addComment } from '../api-actions';
+import { fetchFilmCards, fetchPromoFilm, fetchCurrentFilm, fetchCurrentFilmReviews, fetchCurrentFilmRecomends, fetchFavoriteFilms, addComment } from '../api-actions';
 import { DataProcess } from '../../types/state';
 
 
@@ -8,14 +8,14 @@ const initialState: DataProcess = {
   genre:'All genres',
   more: 8,
   filtredFilmComps: [],
-  films: [],
+  filmCards: [],
   promoFilm: {} as PromoFilm,
   currentFilm:{} as FilmComp,
   currentFilmReviews: [],
   currentFilmRecomends: [],
   favoriteFilms: [],
 
-  filmsLoadingStatus: false,
+  filmCardsLoadingStatus: false,
   promoFilmLoadingStatus: false,
   currentFilmLoadingStatus: false,
   currentFilmReviewsLoadingStatus: false,
@@ -24,7 +24,7 @@ const initialState: DataProcess = {
   sendCommentStatus: true,
 };
 
-function filterFilmComps(genre: string, films: FilmCard[]): FilmCard[] {
+export function filterFilmComps(genre: string, films: FilmCard[]): FilmCard[] {
   return genre !== 'All genres'
     ? films.filter((element) => element.genre === genre)
     : films;
@@ -34,32 +34,28 @@ export const filmData = createSlice({
   name: 'data',
   initialState,
   reducers: {setGenre: (state, action: PayloadAction<string>) => {
-
     const { payload } = action;
-
     if (payload !== state.genre) {
-      state.more = 8 >= filterFilmComps(payload, state.films).length ? -1 : 8;
+      state.more = 8 >= filterFilmComps(payload, state.filmCards).length ? -1 : 8;
     }
     state.genre = payload;
-
-    state.filtredFilmComps = state.more > 0 ? filterFilmComps(payload, state.films).slice(0,state.more) : filterFilmComps(payload, state.films);
-
+    state.filtredFilmComps = state.more > 0 ? filterFilmComps(payload, state.filmCards).slice(0,state.more) : filterFilmComps(payload, state.filmCards);
   },
   setMore: (state, action: PayloadAction<number>) => {
     const { payload } = action;
-    state.more = state.more + payload >= filterFilmComps(state.genre, state.films).length ? -1 : state.more + payload;
-    state.filtredFilmComps = state.more > 0 ? filterFilmComps(state.genre, state.films).slice(0,state.more) : filterFilmComps(state.genre, state.films);
+    state.more = state.more + payload >= filterFilmComps(state.genre, state.filmCards).length ? -1 : state.more + payload;
+    state.filtredFilmComps = state.more > 0 ? filterFilmComps(state.genre, state.filmCards).slice(0,state.more) : filterFilmComps(state.genre, state.filmCards);
 
   },},
   extraReducers(builder) {
     builder
-      .addCase(fetchFilms.pending, (state) => {
-        state.filmsLoadingStatus = true;
+      .addCase(fetchFilmCards.pending, (state) => {
+        state.filmCardsLoadingStatus = true;
       })
-      .addCase(fetchFilms.fulfilled, (state, action: PayloadAction<FilmCard[]>) => {
+      .addCase(fetchFilmCards.fulfilled, (state, action: PayloadAction<FilmCard[]>) => {
         if (action.payload !== undefined){
-          state.films = action.payload;
-          state.filmsLoadingStatus = false;
+          state.filmCards = action.payload;
+          state.filmCardsLoadingStatus = false;
         }
       })
 

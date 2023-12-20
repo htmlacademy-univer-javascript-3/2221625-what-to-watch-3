@@ -12,7 +12,7 @@ import { AuthData } from '../types/auth-data';
 import { toast } from 'react-toastify';
 
 
-export const fetchFilms = createAsyncThunk<FilmCard[], void, {
+export const fetchFilmCards = createAsyncThunk<FilmCard[], void, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -133,7 +133,6 @@ export const changeFilmStatus = createAsyncThunk<void, string, {
     } catch (error) {
 
       if (error instanceof AxiosError && error.response?.status === 409) {
-
         await api.post(`${APIRoute.Favorite}/${id}/0`, axiosConfig);
         dispatch(fetchFavoriteFilms());
       } else{
@@ -186,7 +185,6 @@ export const checkAuthAction = createAsyncThunk<string, undefined, {
 
     const response = await api.get<UserData>(APIRoute.Login);
     return response.data.avatarUrl;
-
 
   });
 
