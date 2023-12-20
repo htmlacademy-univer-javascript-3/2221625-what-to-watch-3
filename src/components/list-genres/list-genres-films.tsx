@@ -15,7 +15,13 @@ const ListGenresFilms: React.FC<ListGenresProps> = memo((props: ListGenresProps)
   const more = useAppSelector(getMore);
   const films = useAppSelector(getFilmCards);
   useEffect(() => {
-    dispatch(setGenre(props.activeTab));
+    let isMounted = true;
+    if (isMounted) {
+      dispatch(setGenre(props.activeTab));
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [props.activeTab, dispatch]);
 
   const buttonStyles = {

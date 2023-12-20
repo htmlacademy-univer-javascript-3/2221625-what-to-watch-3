@@ -1,7 +1,7 @@
-import { render,screen } from '@testing-library/react';
+import { render,screen,act } from '@testing-library/react';
 import TabsGenres from './tabs-genres';
 
-import React from 'react';
+
 import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeStore } from '../../utils/mocks';
 import { fireEvent } from '@testing-library/react';
@@ -37,16 +37,21 @@ describe('Component: TabsGenres', () => {
       mockFakeStore
     );
 
-
-    render(withStoreComponent);
+    act(() => {
+      render(withStoreComponent);
+    });
 
     expect(screen.getByText('All genres').parentElement).toHaveClass('catalog__genres-item--active');
-    fireEvent.click(screen.getByText('Fantasy'));
+    act(() => {
+      fireEvent.click(screen.getByText('Action'));
+    });
     expect(screen.getByText('All genres').parentElement).not.toHaveClass('catalog__genres-item--active');
-    expect(screen.getByText('Fantasy').parentElement).toHaveClass('catalog__genres-item--active');
-    fireEvent.click(screen.getByText('Comedy'));
-    expect(screen.getByText('Fantasy').parentElement).not.toHaveClass('catalog__genres-item--active');
-    expect(screen.getByText('Comedy').parentElement).toHaveClass('catalog__genres-item--active');
+    expect(screen.getByText('Action').parentElement).toHaveClass('catalog__genres-item--active');
+    fireEvent.click(screen.getByText('Drama'));
+
+
+    expect(screen.getByText('Action').parentElement).not.toHaveClass('catalog__genres-item--active');
+    expect(screen.getByText('Drama').parentElement).toHaveClass('catalog__genres-item--active');
 
   });
 });

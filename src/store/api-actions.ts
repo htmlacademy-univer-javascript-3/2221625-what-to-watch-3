@@ -20,6 +20,7 @@ export const fetchFilmCards = createAsyncThunk<FilmCard[], void, {
 
   const response = await api.get(APIRoute.Films);
   const data: FilmCard[] = response.data as FilmCard[];
+
   return data;
 });
 
@@ -109,7 +110,6 @@ export const fetchFavoriteFilms = createAsyncThunk<FilmCard[], undefined, {
     const response = await api.get(APIRoute.Favorite);
     const data: FilmCard[] = response.data as FilmCard[];
     return data;
-
   }
 );
 

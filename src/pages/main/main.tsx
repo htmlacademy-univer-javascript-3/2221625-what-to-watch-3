@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TabsGenres from '../../components/list-genres/tabs-genres';
 import Header from '../../components/header/header';
 import MyListButton from '../../components/myList-button/myList-button';
@@ -38,7 +38,7 @@ function Main(): JSX.Element{
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button" onClick={playerClick}>
+                <button className="btn btn--play film-card__button" type="button" data-testid='play-button' onClick={playerClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -56,11 +56,11 @@ function Main(): JSX.Element{
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link to='/' className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <div className="copyright">

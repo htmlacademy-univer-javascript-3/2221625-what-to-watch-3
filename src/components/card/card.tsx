@@ -18,7 +18,9 @@ function Card({cardProps}: {cardProps:FilmCard}): JSX.Element{
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isHovered) {
+
       timer = setTimeout(() => {
+
         setDisplayedPath(cardProps.previewVideoLink);
       }, 1000);
     } else {

@@ -4,6 +4,7 @@ import { FilmCard, FilmComp, PromoFilm, Review } from '../../types/film';
 
 
 export const getMore = (state: Pick<State, Namespace.Data>): number => state[Namespace.Data].more;
+export const getGenre = (state: Pick<State, Namespace.Data>): string => state[Namespace.Data].genre;
 
 export const getFilmCards = (state: Pick<State, Namespace.Data>): FilmCard[] => state[Namespace.Data].filtredFilmComps;
 export const getFilmCardsDataLoadingStatus = (state: Pick<State, Namespace.Data>): boolean => state[Namespace.Data].filmCardsLoadingStatus;

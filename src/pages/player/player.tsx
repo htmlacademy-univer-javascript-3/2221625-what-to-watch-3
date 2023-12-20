@@ -5,24 +5,12 @@ import { store } from '../../store/index';
 import { fetchCurrentFilm } from '../../store/api-actions';
 import { useEffect, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { formatTime, handleProgressBarClick } from './player-utils';
 
-function formatTime(time: number): string {
-  const hours = Math.floor(time / 3600);
-  const minutes = Math.floor((time % 3600) / 60);
-  const seconds = Math.floor(time % 60);
-
-  const formattedHours = String(hours).padStart(2, '0');
-  const formattedMinutes = String(minutes).padStart(2, '0');
-  const formattedSeconds = String(seconds).padStart(2, '0');
-
-  return hours > 0
-    ? `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
-    : `${formattedMinutes}:${formattedSeconds}`;
-}
 
 function Player(): JSX.Element{
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(true);
   const params = useParams();
 
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -43,16 +31,22 @@ function Player(): JSX.Element{
 
   const currentFilmComp = useAppSelector(getCurrentFilm);
   const videoElement = currentFilmComp ? (
-    <video
-      src={currentFilmComp.videoLink}
-      className="player__video"
-      id={currentFilmComp.id}
-      poster={currentFilmComp.posterImage}
-      autoPlay
-      muted
-      onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
-      onDurationChange={(e) => setDuration(e.currentTarget.duration)}
-    />
+    <>
+      {isLoading && <div data-testid="loader">Loading...</div>}
+      <video
+        src={currentFilmComp.videoLink}
+        className="player__video"
+        id={currentFilmComp.id}
+        data-testid="player-video"
+        poster={currentFilmComp.posterImage}
+        autoPlay
+        muted
+        onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
+        onDurationChange={(e) => setDuration(e.currentTarget.duration)}
+        onLoadStart={() => setIsLoading(true)}
+        onLoadedMetadata={() => setIsLoading(false)}
+      />
+    </>
   ) : null;
 
   const playPauseClick = () => {
@@ -98,20 +92,6 @@ function Player(): JSX.Element{
   const progressValue = isNaN(duration) || isNaN(currentTime) || duration === 0 ? 0 : (currentTime / duration) * 100;
 
 
-  const handleProgressBarClick = (e: React.MouseEvent<HTMLProgressElement>) => {
-    const progressBar = e.currentTarget;
-    const clickPosition = e.clientX - progressBar.getBoundingClientRect().left;
-    const newPosition = (clickPosition / progressBar.clientWidth) * 100;
-    const newTime = (newPosition / 100) * duration;
-    const video = document.getElementById(currentFilmComp.id) as HTMLVideoElement;
-
-    if (video) {
-      video.currentTime = newTime;
-      setCurrentTime(newTime);
-    }
-    video.play();
-  };
-
   return (
     <div className="player">
       {videoElement}
@@ -126,7 +106,7 @@ function Player(): JSX.Element{
               className="player__progress"
               value={progressValue}
               max="100"
-              onClick={(e) => handleProgressBarClick(e)}
+              onClick={(e) => handleProgressBarClick(e, document.getElementById(currentFilmComp.id) as HTMLVideoElement,duration,setCurrentTime)}
               style={{
                 cursor: 'pointer',
               }}
@@ -148,7 +128,7 @@ function Player(): JSX.Element{
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play" onClick={playPauseClick}>
+          <button type="button" className="player__play" data-testid="play-pause-button" onClick={playPauseClick}>
             {isPlaying ? (
               <svg viewBox="0 0 14 21" width="14" height="21">
                 <use xlinkHref="#pause"></use>
@@ -160,7 +140,7 @@ function Player(): JSX.Element{
             )}
             <span>{isPlaying ? 'Pause' : 'Play'}</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{currentFilmComp.name}</div>
 
           <button type="button" className="player__full-screen" onClick={fullScreenClick}>
             <svg viewBox="0 0 27 27" width="27" height="27">

@@ -18,6 +18,13 @@ function Tabs({currentFilmComp,currentReviews} : TabsProps) :JSX.Element{
     setActiveTab(tabName);
   };
 
+  const buttonStyles = {
+    border: 'none',
+    backgroundColor: 'transparent',
+    padding: 0,
+    cursor: 'pointer',
+  };
+
   return (
     <div className="film-card__wrap film-card__translate-top">
       <div className="film-card__info">
@@ -29,13 +36,13 @@ function Tabs({currentFilmComp,currentReviews} : TabsProps) :JSX.Element{
           <nav className="film-nav film-card__nav">
             <ul className="film-nav__list">
               <li className={`film-nav__item ${activeTab === 'overview' ? 'film-nav__item--active' : ''}`}>
-                <a className="film-nav__link" onClick={() => handleTabClick('overview')}>Overview</a>
+                <button style={buttonStyles} className="film-nav__link" onClick={() => handleTabClick('overview')}>Overview</button>
               </li>
               <li className={`film-nav__item ${activeTab === 'details' ? 'film-nav__item--active' : ''}`}>
-                <a className="film-nav__link" onClick={() => handleTabClick('details')}>Details</a>
+                <button style={buttonStyles} className="film-nav__link" onClick={() => handleTabClick('details')}>Details</button>
               </li>
               <li className={`film-nav__item ${activeTab === 'reviews' ? 'film-nav__item--active' : ''}`}>
-                <a className="film-nav__link" onClick={() => handleTabClick('reviews')}>Reviews</a>
+                <button style={buttonStyles} className="film-nav__link" onClick={() => handleTabClick('reviews')}>Reviews</button>
               </li>
             </ul>
           </nav>
