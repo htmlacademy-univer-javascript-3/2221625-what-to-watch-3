@@ -1,6 +1,5 @@
 import { render,screen } from '@testing-library/react';
 import Header from './header';
-
 import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeStore } from '../../utils/mocks';
 import { AuthorizationStatus } from '../../const';

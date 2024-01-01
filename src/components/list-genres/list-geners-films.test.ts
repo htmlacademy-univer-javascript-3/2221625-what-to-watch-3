@@ -1,4 +1,5 @@
 import { render,screen,act } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import ListGenresFilms from './list-genres-films';
 import React from 'react';
 import { withHistory, withStore } from '../../utils/mock-component';
@@ -13,6 +14,7 @@ describe('Component: ListGenresFilms', () => {
         filmCards: mockFakeFilmCards,
       },
     });
+
     const withHistoryComponent = withHistory(React.createElement(ListGenresFilms, {activeTab:'test'}));
     const { withStoreComponent, mockStore } = withStore(withHistoryComponent, mockFakeStore);
 
@@ -25,6 +27,13 @@ describe('Component: ListGenresFilms', () => {
     expect(buttonElement).toHaveTextContent('more');
     expect(mockStore.getActions()[0].type).toBe('data/setGenre');
 
+    const withHistoryComponent = withHistory(React.createElement(ListGenresFilms, { activeTab: 'Comedy' }));
+    const { withStoreComponent } = withStore(
+      withHistoryComponent,
+      mockFakeStore
+    );
+
+    render(withStoreComponent);
 
   });
 });
