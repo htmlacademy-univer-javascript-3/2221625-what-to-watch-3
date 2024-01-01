@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '../../components/tabs/tabs';
 import FilmList from '../../components/film-list/film-list';
+<<<<<<< HEAD
 import MyListButton from '../../components/mylist-button/mylist-button';
+=======
+import MyListButton from '../../components/my-list-button/mylist-button';
+>>>>>>> e32ce196b839b17227ba792f26a24d0cc28cad96
 import { fetchCurrentFilm, fetchCurrentFilmRecomends, fetchCurrentFilmReviews } from '../../store/api-actions';
 import { useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
