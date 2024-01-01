@@ -4,8 +4,6 @@ import React from 'react';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { fakeFilmCards, makeFakeStore } from '../../utils/mocks';
 describe('Component: ListGenresFilms', () => {
-
-asdsadas
   it('should render correctly', () => {
     const mockFakeFilmCards = fakeFilmCards;
 
