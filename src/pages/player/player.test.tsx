@@ -38,6 +38,7 @@ describe('Component: Player', () => {
     const playPauseButton = screen.getByTestId('play-pause-button');
 
     expect(playPauseButton).toBeInTheDocument();
+   
     expect(screen.getByRole('button', { name: /pause/i })).toBeInTheDocument();
 
     fireEvent.click(playPauseButton);

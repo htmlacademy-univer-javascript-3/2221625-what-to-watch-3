@@ -1,5 +1,5 @@
 import { render,screen } from '@testing-library/react';
-import MyListButton from './myList-button';
+import MyListButton from './mylist-button';
 
 
 import { withHistory, withStore } from '../../utils/mock-component';

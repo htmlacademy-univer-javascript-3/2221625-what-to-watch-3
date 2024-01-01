@@ -106,7 +106,7 @@ function Player(): JSX.Element{
               className="player__progress"
               value={progressValue}
               max="100"
-              onClick={(e) => handleProgressBarClick(e, document.getElementById(currentFilmComp.id) as HTMLVideoElement,duration,setCurrentTime)}
+              onClick={(e) => handleProgressBarClick(e, document.getElementById(currentFilmComp.id) as HTMLVideoElement, duration, setCurrentTime)}
               style={{
                 cursor: 'pointer',
               }}

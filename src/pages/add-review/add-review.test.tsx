@@ -51,7 +51,6 @@ describe('Component: AuthScreen', () => {
     await userEvent.clear(screen.getByTestId('textarea-test'));
     await userEvent.type(
       screen.getByTestId('textarea-test'),
-
       reviewText,
     );
     await userEvent.click(screen.getByTestId('test-star10'));
