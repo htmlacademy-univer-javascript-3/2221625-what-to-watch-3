@@ -3,7 +3,7 @@ import ListGenresFilms from './list-genres-films';
 import React from 'react';
 import { withHistory, withStore } from '../../utils/mock-component';
 import { fakeFilmCards, makeFakeStore } from '../../utils/mocks';
-
+asdsad
 describe('Component: ListGenresFilms', () => {
 
 
