@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import VideoPlayer from '../videoPlayer/videoPlayer';
+import VideoPlayer from '../video-player/video-player';
 import { FilmCard } from '../../types/film';
 
 
