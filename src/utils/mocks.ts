@@ -42,14 +42,14 @@ export const makeFakeCurrentFilm = (): FilmComp => ({
   backgroundColor: internet.color(),
   videoLink: internet.url(),
   description: lorem.paragraphs(),
-  rating: datatype.number({ min: 0, max: 10, precision: 0.1 }),
+  rating: random.number({ min: 0, max: 10, precision: 0.1 }),
   scoresCount: datatype.number(),
   director: name.findName(),
   starring: [name.findName(), name.findName(), name.findName()],
   runTime: datatype.number({ min: 60, max: 180 }),
   genre: random.word(),
   released: datatype.number(),
-  isFavorite: datatype.boolean(),
+  isFavorite: random.boolean(),
 });
 
 export const makeFakeReview = (): Review => ({
@@ -57,7 +57,7 @@ export const makeFakeReview = (): Review => ({
   date: datatype.datetime().toString(),
   user: internet.userName(),
   comment: lorem.paragraph(),
-  rating: datatype.number({ min: 0, max: 10, precision: 0.1 }),
+  rating: random.number({ min: 0, max: 10, precision: 0.1 }),
 });
 
 export const makeFakeStore = (initialState?: Partial<State>): State => ({

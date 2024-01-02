@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import TabsGenres from '../../components/list-genres/tabs-genres';
 import Header from '../../components/header/header';
-import MyListButton from '../../components/mylist-button/mylist-button';
+import MyListButton from '../../components/myList-button/myList-button';
 import { useAppSelector } from '../../hooks';
 import { getPromoFilm } from '../../store/film-data/selectors';
 import { useMemo } from 'react';
