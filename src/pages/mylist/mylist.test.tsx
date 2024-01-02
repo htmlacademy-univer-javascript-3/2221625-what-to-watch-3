@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { withHistory, withStore } from '../../utils/mock-component';
-import MyList from './my-list';
+import MyList from './mylist';
 import { makeFakeFilmCard, makeFakeStore } from '../../utils/mocks';
 
 

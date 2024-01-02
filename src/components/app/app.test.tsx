@@ -5,7 +5,7 @@ import { withHistory, withStore } from '../../utils/mock-component';
 import { makeFakeCurrentFilm, makeFakeFilmCard, makeFakePromoFilm, makeFakeStore } from '../../utils/mocks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import SignIn from '../../pages/sign-in/sign-in';
-import MyList from '../../pages/my-list/my-list';
+import MyList from '../../pages/mylist/mylist';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Page404 from '../../pages/404-page/404-page';
 import AddReview from '../../pages/add-review/add-review';
