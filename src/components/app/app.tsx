@@ -2,7 +2,7 @@ import Main from '../../pages/main/main';
 import AddReview from '../../pages/add-review/add-review';
 import MoviePage from '../../pages/movie-page/movie-page';
 import Player from '../../pages/player/player';
-import MyList from '../../pages/my-list/my-list';
+import MyList from '../../pages/mylist/mylist';
 import {HelmetProvider} from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import SignIn from '../../pages/sign-in/sign-in';
