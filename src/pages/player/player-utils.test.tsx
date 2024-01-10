@@ -12,31 +12,36 @@ describe(' Player utils', () => {
   it('should update video currentTime and play video on progress bar click', () => {
     const mockDuration = 100;
     let currentTime = 0;
-    const videoElem = document.createElement('video');
-    videoElem.id = 'id';
+    const videoElem: Partial<HTMLVideoElement> = {
+      id: 'id',
+      currentTime: 0,
+      play: vi.fn(),
+    };
+
+    const progressElem = {
+      clientWidth: 100,
+      getBoundingClientRect: vi.fn(() => ({ left: 0 })),
+    };
 
 
-    const progressElem = document.createElement('progress');
-    Object.defineProperty(progressElem, 'clientWidth', { value: 100, writable: true });
     const mockEvent = {
-      currentTarget: progressElem ,
+      currentTarget: progressElem,
       clientX: 50,
     };
+
     const newPosition = (mockEvent.clientX / mockEvent.currentTarget.clientWidth) * 100;
     const newTime = (newPosition / 100) * mockDuration;
     handleProgressBarClick(
-          mockEvent as React.MouseEvent<HTMLProgressElement>,
-          videoElem ,
-          mockDuration,
-          () => {
-            currentTime = newTime;
-          }
+        mockEvent as unknown as React.MouseEvent<HTMLProgressElement>,
+        videoElem as HTMLVideoElement,
+        mockDuration,
+        () => {
+          currentTime = newTime;
+        }
     );
 
     expect(videoElem.currentTime).toBe(newTime);
     expect(currentTime).toBe(newTime);
-
-
   });
 
 });
